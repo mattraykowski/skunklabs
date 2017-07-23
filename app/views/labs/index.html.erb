@@ -1,0 +1,45 @@
+<div class="col-lg-3 col-sm-3">
+  <%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9 col-sm-9">
+  <h1>Listing labs</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <!-- <th>Founder</th> -->
+        <th>Name</th>
+        <th>Focus Area</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @labs.each do |lab| %>
+        <tr>
+          <!-- <td><%= lab.user.email %></td> -->
+          <td><%= link_to lab.name, lab %></td>
+          <td><%= lab.focus_type.name %></td>
+          <td><%= lab.status_name.capitalize %>
+          <!-- <td>
+            <div class="btn-group">
+              <%= link_to raw('<i class="glyphicon glyphicon-eye-open"></i>'), lab, class: 'btn btn-xs btn-default' %>
+              <%= link_to raw('<i class="glyphicon glyphicon-cog"></i>'), edit_lab_path(lab), class: 'btn btn-xs btn-default' %>
+              <%= link_to raw('<i class="glyphicon glyphicon-ban-circle"></i>'), lab, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+            </div>
+          </td> -->
+        </tr>
+      <% end %>
+      <% if @labs.length == 0 %>
+        <tr>
+          <td colspan="3">No labs found.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Propose Lab', new_lab_path, class: 'btn btn-sm btn-success proposeDisclaimer' if user_signed_in? %>
+</div>

@@ -1,0 +1,42 @@
+<div class="col-lg-3 col-sm-3">
+	<%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9 col-sm-9">
+	<div class="row">
+		<div class="col-lg-12 col-sm-12">
+			<% @recent_updates.each do |comment| %>
+			<div class="well">
+				<h3><%= comment.subject %></h3>
+				<small>by <%= get_user_popover_name(comment.user) %> on <%= comment.created_at.to_formatted_s(:long_ordinal) %></small>
+				<% if comment.user == current_user %>
+				<div class="btn-group">
+					<%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'),
+					lab_comment_path(comment.lab, comment),
+					method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom', title: 'Remove comment' },
+					class: 'btn btn-xs btn-default' %>
+					<%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_lab_comment_path(comment.lab, comment),
+					data: { toggle: 'tooltip', placement: 'bottom', title: 'Edit comment' },
+					class: 'btn btn-xs btn-default' %>
+				</div>
+				<% end %>
+				<h4>For Lab: <small><%= comment.lab.name %> <%= link_to 'Go To Lab', comment.lab, class: 'btn btn-xs btn-default' %></small></h4>
+				<hr/>
+
+				<% if comment.is_update %>
+				<div class="progress progress-sm" >
+					<div class="progress-bar"
+					role="progressbar" aria-valuenow="<%= comment.progress %>" aria-valuemax="100" style="width: <%= comment.progress %>%;">
+						<span class="sr-only"><%= comment.progress %>% Complete</span>
+						<span class="progress-text progress-text-sm"><%= comment.progress %>%</span>
+					</div>
+				</div>
+				<% end %>
+				<p>
+					<%= raw(comment.comment) %>
+				</p>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>

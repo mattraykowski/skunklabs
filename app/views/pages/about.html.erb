@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-sm-10" data-spy="scroll" data-target=".about-toc">
+
+<h2 id="hdr-top">About Skunk Labs</h2>
+
+
+<p class="lead">
+	Why Skunk Labs
+</p>
+
+<p>
+	<strong>Skunk Labs</strong> was designed around the idea that skunkworks labs should require minimal lab management. Calling
+	it a project management tool would be stretching the phrase.	Skunk Labs is a centralized place for individuals in the organization to
+	come and seek help on their side project and to keep interested individuals informed.
+</p>
+
+<p>
+	Skunk Labs is separated into two primary areas of functionality: <em>Skunk Labs Suggestions</em> and <em>Labs</em>.
+</p>
+
+<p>
+	The Suggestions area is where you, as an ordinary employee, can make suggestions for improvements. This is similar to the concept of
+	<em>ACT Teams</em>. You can make a suggestion and then a team of volunteers (the Suggestion Team) will attempt to guide it completion.
+	You can "plus" an idea to vote for it and that will help indicate to the organization popular suggestions or ideas. It may also help if
+	the suggestion requires management involvement or a budget.
+</p>
+
+<p>
+	You can approach Labs in a similar manner. However the spirit of a lab is that you have an idea that you would like to implement
+	on your spare time but need other people's assistance. These could be labs to create new internal tools to make your team's life better,
+	to plan a training event to provide the department with an opportunity to use new technology, or to reassess the way work is done between
+	cross-functional teams and attempt to fix it. The sky is the limit. With labs you propose the idea, define the roles  you will need to
+	complete the lab, and then recruit (or wait for) people to work on it with you.
+</p>
+
+<div class="alert alert-warning">
+  <strong>Tip!</strong> You can change your profile picture within Skunk Labs by registering your Children's email address with <a href="http://en.gravatar.com/">Gravatar</a>.
+</div>
+
+<h3 id="hdr-suggestions">Skunk Labs Suggestions</h3>
+
+<p class="lead">
+	Creating Suggestions
+</p>
+
+<p>
+	Creating suggestions is very simple. Click on Suggestions on the navigation bar at the top of the screen. On the bottom of the suggestion list
+	is a green button for new suggestions. All a suggestion requires is that you provide a meaningful title and a detailed description. Once you save
+	your suggestion you can edit it again later.
+</p>
+
+<p>
+	Your suggestion team is:
+
+	<ul class="list-inline">
+	  <% @team.each do |member| %>
+	    <li><%= get_user_popover_name(member) %></li>
+	  <% end %>
+	</ul>
+</p>
+
+<h3 id="hdr-skunklabs-labs">Skunk Labs Labs</h3>
+
+<p class="lead">
+	Lab Workflow
+</p>
+
+<p>
+	The lab workflow for Skunk Labs is pretty simple. There are five stages a lab can be in: proposed, started, completed, blocked and
+	abandoned. Most of these are pretty self explanatory. All new lab ideas start out as <em>proposed</em> labs. The person whom proposed
+	the lab idea is the <em>founder</em> of the lab. The founder then started defining the team roles they think would be required to
+	successfully complete the lab. Only the founder can progress the lab into other stages.</p>
+<p>
+	The purpose of the other stages is pretty self explanatory. A <em>started</em> lab is a lab in progress. A <em>completed</em> lab
+	is a lab that finished and the team feels that it has accomplished its goals. A <em>blocked</em> lab is one that the founder feels can
+	be completed but progress is blocked for some reason such as requiring funding, organizational boundaries, etc. Finally, an <em>abandoned</em>
+	lab is one that the founder feels cannot realistically be completed successfully.
+</p>
+
+<p class="lead">
+	Lab Team
+</p>
+
+<p>
+	Once the team is defined control largely spreads to the entire team. The founder has to select roles such as 'web developer' or 'programmer'
+	and roles of that nature. Anyone can <em>take</em> any role they want. Once they click on <em>Take Role</em> they are a part of the lab's
+	team and have full access to make changes to the lab. While only the founder can change the state (started, blocked, etc) the team at large
+	edit the team roles, lab goals, and so on. This is because despite the fact this started as potentially one person's idea - skunkworks
+	labs are collaborative efforts.
+</p>
+
+<p>
+	Lab's also have supporters, which are not explicitly members of the team. This is used to represent people who have an interest in seeing
+	the lab completed or otherwise support the lab's goals. Labs with a large number of supporters should reflect the importance or
+	necessity of the lab.
+</p>
+
+<p class="lead">
+	Lab Updates
+</p>
+
+<p>
+	Overall progress in the lab is tracked through lab updates which take one of two forms: a status update or a comment. Only team members
+	can provide status updates and when they do so they provide a percentage of completeness. This percentage is how much of <em>their</em> work is
+	complete, not the overall lab. The average of all most recent status updates for each user is the overall progress of the lab.
+</p>
+
+<p>
+	On the other hand any user, not just team members, can comment on labs. This allows people who aren't actively involved to still be able to
+	play a part or contribute to the lab. Comments are a great way of providing feedback in a transparent manner.
+</p>
+
+<div id="sec-lab-development">
+<p class="lead">Development</p>
+
+<p>
+	Matt Raykowski (matt.raykowski@childrensmn.org) is responsible for development and maintenance of Skunk Labs. However, as Skunk Labs is a full
+	skunkworks lab anyone may clone or fork the code from the <a href="http://stash.childrenshc.org/projects/SW/repos/skunklabs2/browse">Skunk Labs repo</a>.
+	Feel free to make changes and submit a pull request. If you make changes please make sure that your changes are properly tested using RSpec and/or Capybara.
+</p>
+</div>
+  </div>
+  <div class="col-sm-2">
+  	<div data-spy="affix" data-offset-top="60" data-offset-bottom="200" class="about-toc">
+  	  <ul class="nav nav-pills nav-stacked navbar-example">
+  	  	<li><a href="#hdr-top">Top</a></li>
+  	    <li><a href="#hdr-skunklabs-labs">Skunk Labs Labs</a></li>
+  	    <li><a href="#sec-lab-workflow">Lab Workflow</a></li>
+  	  	<li><a href="#sec-lab-development">Development</a></li>
+  	  </ul>
+  	</div>
+  </div>
+</div>

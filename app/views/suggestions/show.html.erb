@@ -1,0 +1,63 @@
+<div class="col-lg-3">
+  <%= render 'shared/suggestion_sidebar' %>
+</div>
+
+<div class="col-lg-9">
+  <div class="row">
+    <div class= "col-sm-offset-2 col-sm-10">
+      <h2><%= @suggestion.title %>
+        <div class="btn-group">
+          <%= link_to 'Back to Suggestions', suggestions_path, class: 'btn btn-xs btn-default' %>
+          <% if user_signed_in? && @suggestion.can_modify(current_user) %>
+            <%= link_to 'Edit', edit_suggestion_path(@suggestion), class: 'btn btn-xs btn-default' %>
+          <% end %>
+        </div>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+  	<div class="col-sm-8">
+  	  <dl class="dl-horizontal">  	    
+  	    <dt>Desctiption</dt>
+      	<dd><div class="well"><%= @suggestion.description.html_safe %></div></dd>  	    
+  	    
+  	    <dt>Notes</dt>
+  	    <dd>
+  	      <div class="well">
+  	      	
+  		    <%= @suggestion.notes ? @suggestion.notes.html_safe : 'No notes yet added.' %>
+  	      </div>
+  	    </dd>
+      </dl>
+  	</div>
+  	<div class="col-sm-4">
+    <dl class="dl-horizontal">
+  	  	<dt>Creator</dt>
+  	    <dd><%= get_user_popover_name(@suggestion.creator) %></dd>
+  	
+  	    <dt>Team Member</dt>
+  	    <dd>
+      	  <% if @suggestion.team_member %>
+            <%= get_user_popover_name(@suggestion.team_member) %>
+          <% else %>
+            <em>Not Assigned</em>
+          <% end %>
+  	    </dd>
+  	  </dl>
+  	  <dl class="dl-horizontal">	
+      	<dt>Status</dt>
+  	    <dd><%= @suggestion.status.name.capitalize %></dd>
+  	
+      	<dt>Completed On</dt>
+        <dd><%= @suggestion.completion_date ? @suggestion.completion_date : raw('<em>In Progress</em>') %></dd>
+  	
+      	<dt>Created On</dt>
+  	    <dd><%= @suggestion.created_at.to_formatted_s(:short) %></dd>
+  	
+      	<dt>Last Updated</dt>
+  	    <dd><%= @suggestion.updated_at.to_formatted_s(:short) %></dd>
+      </dl>
+  	</div>
+  </div>
+</div>

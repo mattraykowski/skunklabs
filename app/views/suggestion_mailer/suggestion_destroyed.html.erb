@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @suggestion.title %></h1>
+
+    <p>Submitted by <%= @suggestion.creator.safe_name %></p>
+    <p>
+      <%= @suggestion.description.html_safe %>
+    </p>
+
+    <p>This suggestion was destroyed by <%= @destroyer[:name] %> (<%= @destroyer[:email] %>)    
+  </body>
+</html>

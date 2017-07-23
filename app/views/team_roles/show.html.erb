@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lab:</strong>
+  <%= @team_role.lab_id %>
+</p>
+
+<p>
+  <strong>Role type:</strong>
+  <%= @team_role.role_type_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @team_role.user_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @team_role.comment %>
+</p>
+
+<%= link_to 'Edit', edit_team_role_path(@team_role) %> |
+<%= link_to 'Back', team_roles_path %>

@@ -1,0 +1,45 @@
+<div class="col-lg-3 col-sm-3">
+	<%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9 col-sm-9">
+	<h1>Listing Team Roles</h1>
+	<p class="lead">
+		<%= @lab.name %>
+	</p>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Role type</th>
+				<th>User</th>
+				<th>Comment</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @team_roles.each do |team_role| %>
+			<tr>
+				<td><%= team_role.role_type.name %></td>
+				<td><%= team_role.user ? get_user_popover_name(team_role.user) : 'vacant' %></td>
+				<td><%= team_role.comment ? truncate(sanitize(team_role.comment, tags: []), length: 50) : 'no comment' %></td>
+				<td>
+					<div class="btn-group">
+						<%= link_to 'Edit', edit_lab_team_role_path(@lab, team_role), class: 'btn btn-xs btn-default'  %>
+						<%= link_to 'Destroy', lab_team_role_path(@lab, team_role), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-default' %>
+						<% if @lab.is_owner?(current_user) && team_role.user %>
+						  <%= link_to 'Release Role', release_role_lab_team_role_path(@lab, team_role), class: 'btn btn-xs btn-default' %>
+						<% end %>
+					</div>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<div class="btn-group">
+		<%= link_to 'New Role', new_lab_team_role_path(@lab), class: 'btn btn-sm btn-default' %>
+		<%= link_to 'Back to Lab', @lab, class: 'btn btn-sm btn-default' %>
+	</div>
+</div>

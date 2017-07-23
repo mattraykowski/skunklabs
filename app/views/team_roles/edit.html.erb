@@ -1,0 +1,17 @@
+<div class="col-lg-3">
+	<%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9">
+	<%= render partial: 'shared/form_errors', locals: { resource: @team_role } %>
+	<div class= "col-sm-offset-2 col-sm-10">
+		<h2>Editing Team Role
+		<div class="btn-group">
+			<%= link_to 'Back', lab_team_roles_path(@lab), class: 'btn btn-sm btn-default' %>
+			<%= link_to 'Back to Lab', @lab, class: 'btn btn-sm btn-default' %>
+		</div></h2>
+	</div>
+
+	<%= render 'form' %>
+
+</div>

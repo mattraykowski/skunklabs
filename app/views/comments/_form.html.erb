@@ -1,0 +1,55 @@
+<%= form_for([@lab, @comment], html: { role: 'form', class: 'form-horizontal' }) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.hidden_field :lab_id %>
+  <%= f.hidden_field :user_id %>
+
+  <div class="form-group">
+    <label>Subject</label>
+	<%= f.text_field :subject, placeholder: 'subject of update...', class: 'form-control' %>
+  </div>
+
+  <% if user_signed_in? && @lab.is_team_member?(current_user) %>
+  <div class="checkbox">
+  	<label>
+  		<%= f.check_box :is_update, checked: true %> <%= f.label :is_update %>
+  	</label>
+
+  </div>
+  <div class="form-group" id="lab-progress-group">
+	<label>Progress&nbsp;&nbsp;</label>
+
+	<%= f.number_field :progress, id: 'updatePercent',
+                        data: { 'slider-id' => 'updatePercentSlider',
+							    'slider-min' => 0,
+							    'slider-max' => 100,
+							    'slider-step' => 5,
+							    'slider-value' => @comment.progress } %>
+
+  </div>
+  <% else %>
+  	<%= f.hidden_field :is_update, value: false %>
+  <% end %>
+
+  <div class="form-group">
+	<label>Comment</label>
+	<div class="well">
+	  <%= f.text_area :comment, class: 'form-control bswysiwyg', rows: 8, placeholder: 'enter the details about your lab update.' %>
+	</div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-default'%>
+  </div>
+<% end %>

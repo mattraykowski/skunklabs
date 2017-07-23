@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @focus_type.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @focus_type.description %>
+</p>
+
+<%= link_to 'Edit', edit_focus_type_path(@focus_type) %> |
+<%= link_to 'Back', focus_types_path %>

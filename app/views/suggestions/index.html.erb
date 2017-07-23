@@ -1,0 +1,91 @@
+<div class="col-lg-3">
+  <%= render 'shared/suggestion_sidebar' %>
+</div>
+
+<div class="col-lg-9">
+  <h1>Listing Suggestions</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      	<th></th>
+        <!-- <th>Creator</th>
+        <th>Team member</th>
+        <th>Status</th>
+        <th>Completed On</th>
+        <th>Created On</th>
+        <th></th>
+      </tr> -->
+    </thead>
+
+    <tbody>
+      <% @suggestions.each do |suggestion| %>
+        <tr>
+          <td>
+          	<div class="row">
+          	  <div class="col-md-1">
+          	  	<% if user_signed_in? %>
+          	  	  <% if suggestion_voted_for(suggestion, current_user) %>
+          	  	    <%= link_to raw('<i class="glyphicon glyphicon-plus"></i>'), unvote_suggestion_path(suggestion), class: 'btn btn-xs btn-default active', data: { toggle: 'tooltip', placement: 'bottom', title: suggestion.suggestion_votes.size.to_s + ' votes' } %>
+          	  	  <% else %>
+          	  	    <%= link_to raw('<i class="glyphicon glyphicon-plus"></i>'), vote_suggestion_path(suggestion), class: 'btn btn-xs btn-default', data: { no_turbolink: true, toggle: 'tooltip', placement: 'bottom', title: suggestion.suggestion_votes.size.to_s + ' votes' } %>
+          	  	  <% end %>
+          	  	<% else %>
+          	  	  <a href="" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="bottom" title="<%= suggestion.suggestion_votes.size %> votes"><i class="glyphicon glyphicon-plus"></i></a>
+          	  	<% end %>
+          	  </div>
+          	  <div class="col-md-2">
+          	  	<div class="row">
+          	  	  <div class="col-md-12">
+          	  	  	<small>by <%= get_user_popover_name(suggestion.creator) %></small>
+          	  	  </div>
+          	  	</div>
+          	  	<div class="row">
+          	  	  <div class="col-md-12">
+          	  	  	<small> 
+          	  	  	  <% if suggestion.team_member %>
+          	            assigned to <br/> <%= get_user_popover_name(suggestion.team_member) %>
+          	          <% else %>
+          	            <em>Not Assigned</em>
+          	          <% end %>
+          	        </small>
+          	  	  </div>
+          	  	</div>          	  	
+          	  </div>
+          	  <div class="col-md-2">
+          	  	<div class="row">
+          	  	  <div class="col-md-12">
+          	  	  	<small>on <%= suggestion.created_at.to_formatted_s(:short) %></small>
+          	  	  </div>
+          	  	</div>
+          	  	<div class="row">
+          	  	  <div class="col-md-12">
+          	  	  	<small><%= suggestion.status.name.capitalize %></small>
+          	  	  </div>
+          	  	</div>
+          	  </div>
+          	  <div class="col-md-6">
+          	  	<%= link_to suggestion.title, suggestion %>
+          	  </div>
+          	  <div class="col-md-1">        	  
+          	      <% if user_signed_in? && suggestion.can_modify(current_user) %>
+          	        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_suggestion_path(suggestion), class: 'btn btn-xs btn-default' %><br/>
+          	        <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), suggestion, class: 'btn btn-xs btn-default', method: :delete, data: { confirm: 'Are you sure?' } %>
+          	      <% end %>
+          	  </div>
+          	</div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <%= paginate @suggestions %>
+  
+  <br/>
+  
+  <%= link_to 'New Suggestion', new_suggestion_path, class: 'btn btn-sm btn-success' %> 
+  
+  
+
+</div>

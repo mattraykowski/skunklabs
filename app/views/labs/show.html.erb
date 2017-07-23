@@ -1,0 +1,153 @@
+<div class="col-lg-3 col-sm-3">
+  <%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9 col-sm-9">
+  <div class="row">
+    <div class="col-lg-8 col-sm-9">
+      <h2><%= @lab.name %></h2>
+      <p>
+        <% if user_signed_in? && !( @lab.is_team_member?(current_user ) || @lab.is_owner?(current_user) )%>
+          <% if @is_supporter %>
+            <%= link_to raw('<i class="glyphicon glyphicon-star"></i>'), lab_unsupport_path(@lab), class: 'btn btn-xs btn-default' %>
+          <% else %>
+            <%= link_to raw('<i class="glyphicon glyphicon-star-empty"></i>'), lab_support_path(@lab), class: 'btn btn-xs btn-default popover-html', data: { placement: 'bottom', toggle: 'popover', content: 'Click to support the lab. You will get email notifications on important changes.'} %>
+          <% end %>
+        <% end %>
+        A <strong><%= @lab.status_name %></strong> lab with a focus on:
+      	<strong class="popover-html" data-title="<%= @lab.focus_type.name%>" data-content="<%= @lab.focus_type.description %>" data-placement="bottom" data-toggle="popover">
+          <%= @lab.focus_type.name %>
+        </strong>
+      </p>
+      <p>Founded by <%= get_user_popover_name(@lab.user) %></p>
+
+      <!-- Display action buttons, first for anyone logged in. -->
+
+      <div class="btn-group">
+        <%= link_to 'Back', labs_path, class: 'btn btn-sm btn-default' %>
+        <% if user_signed_in? && ( @lab.is_team_member?(current_user ) || @lab.user_id == current_user.id )%>
+          <%= link_to 'Edit Lab', edit_lab_path(@lab), class: 'btn btn-sm btn-default' %>
+          <!-- Then for the lab founder only -->
+          <% if @lab.user_id == current_user.id %>
+            <%= link_to 'Start Lab', start_lab_path(@lab), method: :put, class: 'btn btn-sm btn-default' if @lab.transition_okay? Lab::STARTED %>
+            <%= link_to 'Complete Lab', complete_lab_path(@lab), method: :put, data: { confirm: 'Are you sure you want to complete this lab?' }, class: 'btn btn-sm btn-default' if @lab.transition_okay? Lab::COMPLETED %>
+            <%= link_to 'Block Lab', block_lab_path(@lab), method: :put, class: 'btn btn-sm btn-default'if @lab.transition_okay? Lab::BLOCKED %>
+            <%= link_to 'Abandon Lab', abandon_lab_path(@lab), method: :put, data: { confirm: 'Are you sure you want to abandon this lab? <br/> <br/> <em>Abandoned labs cannot be resumed.</em>' }, class: 'btn btn-sm btn-default' if @lab.transition_okay? Lab::ABANDONED %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-sm-3">
+      <p class="lead">Lab Progress</p>
+      <div class="progress popover-html" data-toggle="popover" data-placement="bottom" data-title="Progress Report" data-content="<%= get_progress_report(@lab.team_roles) %>">
+      	<div class="progress-bar" role="progressbar" aria-valuenow="<%= @overall_progress %>" aria-valuemax="100" style="width: <%= @overall_progress %>%;">
+      		<span class="sr-only"><%= @overall_progress %>% Complete</span>
+      		<span class="progress-text"><%= @overall_progress %>%</span>
+      	</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-sm-12">
+      <h2>Goals</h2>
+      <%= @lab.goals.html_safe %>
+      <h2>Measuring Success</h2>
+      <%= @lab.measurements.html_safe %>
+
+      <h2>Lab Updates
+        <% if user_signed_in? %>
+          <%= link_to 'Add Update', new_lab_comment_path(@lab), class: 'btn btn-xs btn-default' %>
+        <% end %>
+      </h2>
+
+	  <% @lab.comments.each do |comment| %>
+	  	<div class="well">
+	    <h4><%= comment.subject %> <small>by <%= get_user_popover_name(comment.user) %> on <%= comment.created_at.to_formatted_s(:long_ordinal) %></small></h4>
+
+	    <% if comment.user == current_user %>
+	    <div class="btn-group">
+	      <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'),
+	                  lab_comment_path(@lab, comment),
+                      method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom', title: 'Remove comment' },
+	    			  class: 'btn btn-xs btn-default' %>
+          <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_lab_comment_path(@lab, comment),
+	    	          data: { toggle: 'tooltip', placement: 'bottom', title: 'Edit comment' },
+	    	          class: 'btn btn-xs btn-default' %>
+	    </div>
+	    <% end %>
+	    <hr/>
+
+	    <% if comment.is_update %>
+	    	<div class="progress progress-sm" >
+      			<div class="progress-bar"
+      			     role="progressbar" aria-valuenow="<%= comment.progress %>" aria-valuemax="100" style="width: <%= comment.progress %>%;">
+      				<span class="sr-only"><%= comment.progress %>% Complete</span>
+      				<span class="progress-text progress-text-sm"><%= comment.progress %>%</span>
+      			</div>
+      		</div>
+	    <% end %>
+	    <p><%= raw(comment.comment) %></p>
+	    </div>
+	  <% end %>
+    </div>
+
+    <div class="col-lg-4 col-sm-12">
+      <h3>Team
+        <% if user_signed_in? && @lab.user.id == current_user.id %>
+          <%= link_to 'Edit Team', lab_team_roles_path(@lab), class: 'btn btn-xs btn-default' %>
+        <% end %>
+      </h3>
+      <ul class="list-group">
+      <% @lab.team_roles.each do |role| %>
+      	<li class="list-group-item">
+      		<span class="badge popover-html" data-toggle="popover" data-placement="left" data-title="<%= role.role_type.name.titleize %>" data-content="<%= role.comment.empty? ? 'no additional details' : role.comment.html_safe %>"><%= role.role_type.name %></span>
+        <% if role.user.nil? %>
+          <% if current_user.nil? || @lab.is_team_member?(current_user) %>
+            vacant
+          <% else %>
+            <%= link_to 'Take Role', take_role_lab_team_role_path(@lab, role), class: 'btn btn-xs btn-default' %>
+          <% end %>
+        <% else %>
+          <% if user_signed_in? && role.user.id == current_user.id %>
+        	<%= link_to 'Release Role', release_role_lab_team_role_path(@lab, role), class: 'btn btn-xs btn-default' %>
+          <% else %>
+            <%= get_user_popover_name(role.user) %>
+
+          <% end %>
+        <% end %>
+        </li>
+      <% end %>
+      </ul>
+
+      <h3>Links
+        <% if user_signed_in? && @lab.is_team_member?(current_user )%>
+          <%= link_to 'Add Link', new_lab_link_resource_path(@lab), class: 'btn btn-xs btn-default' %>
+        <% end %>
+      </h3>
+      <ul class="list-group">
+        <% if @lab.link_resources.size > 0 %>
+          <% @lab.link_resources.each do |link| %>
+            <li class="list-group-item">
+              <div class="btn-group">
+
+                <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_lab_link_resource_path(@lab, link), class: 'btn btn-xs btn-default popover-html', data: { content: 'Edit Link', toggle: 'popover', placement: 'bottom'} %>
+                <%= link_to raw('<i class="glyphicon glyphicon-remove"></i>'), lab_link_resource_path(@lab, link), class: 'btn btn-xs btn-default popover-html', method: :delete, data: { confirm: 'Are you sure?', content: 'Remove Link', toggle: 'popover', placement: 'bottom' } %>
+              </div>
+              <% if link.description.empty? %>
+                <%= link_to link.name, link.url, target: '_blank' %>
+              <% else %>
+                <%= link_to link.name, link.url, target: '_blank', class: 'popover-html', data: { content: link.description.html_safe, toggle: 'popover', placement: 'bottom', title: 'Description'} %>
+              <% end %>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="list-group-item">
+              No links defined.
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

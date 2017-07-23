@@ -1,0 +1,54 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap/dist/css/bootstrap
+ *= require bootstrap/dist/css/bootstrap-theme
+ *= require bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5
+ *= require seiyria-bootstrap-slider/css/bootstrap-slider
+ *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch
+ *= require font-awesome/css/font-awesome.css
+ *= require_self
+ */
+
+.wide-modal {
+	width: 800px;
+}
+
+#updatePercent {
+	display: inline;
+	width: 650px;
+}
+
+.progress-sm {
+	height: 10px;
+}
+
+.progress-text-sm {
+	display: block;
+	line-height: 10px;
+	height: 10px;
+	font-size: 9px;
+	font-weight: bold;
+}
+
+.popover {
+	display:block !important;
+    max-width: 400px !important;
+    width:auto;
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #333333;
+}
+
+.row-form {
+	margin-top: 20px;
+}

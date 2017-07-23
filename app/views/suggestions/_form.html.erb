@@ -1,0 +1,61 @@
+<%= form_for(@suggestion, html: { role: 'form', class: 'form-horizontal' }) do |f| %>
+  <% if @suggestion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@suggestion.errors.count, "error") %> prohibited this suggestion from being saved:</h2>
+
+      <ul>
+      <% @suggestion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+  	<%= f.label :title, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10">
+      <%= f.text_field :title, class: 'form-control' %>
+  	</div>
+  </div>
+
+  <div class="form-group">
+  	<%= f.label :description, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10 well">
+      <%= f.text_area :description, class: 'form-control bswysiwyg', rows: 3, placeholder: 'enter a detailed description of your suggestion.' %>
+  	</div>
+  </div>
+
+  <div class="form-group">
+  	<%= f.label :status, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10">
+      <%= f.collection_select :status_id, SuggestionState.all, :id, :name, {}, { class: 'form-control' } %>
+  	</div>
+  </div>
+
+  <div class="form-group">
+  	<%= f.label :team_member, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10">
+      <%= f.collection_select :team_member_id, User.all_team_members, :id, :safe_name, {include_blank: true}, { class: 'form-control' } %>
+  	</div>
+  </div>
+
+  <div class="form-group">
+  	<div class="col-sm-offset-2 col-sm-10">
+  	  <hr />
+  	</div>
+  </div>
+
+
+  <div class="form-group">
+  	<%= f.label :notes, class: 'col-sm-2 control-label' %>
+  	<div class="col-sm-10 well">
+      <%= f.text_area :notes, class: 'form-control bswysiwyg', rows: 3, placeholder: 'enter detailed notes about this suggestion, processing it, etc.' %>
+  	</div>
+  </div>
+
+  <div class="form-group">
+  	<div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit 'Save', class: 'btn btn-sm btn-success' %>
+    </div>
+  </div>
+<% end %>

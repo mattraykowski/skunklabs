@@ -1,0 +1,70 @@
+<div class="row">
+	<div class="col-lg-<%= user_signed_in? ? '9':'12'%> col-sm-12">
+		<h1>Welcome to Skunk Labs</h1>
+
+		<p class="lead">
+			Children's underground innovation lab!
+		</p>
+
+		<h3>What is Skunk Labs</h3>
+
+		<p>
+			Skunk Labs is an initiative started by Children's employees as an effort to learn new technology
+			and create new tools to make our lives generally better. Skunk Labs is a tool for proposing ideas
+			and seeking/attracting people to help  you accomplish them. Check the <%= link_to 'About page', pages_about_path %>
+			for more information on how to use Skunk Labs.
+		</p>
+
+		<p>
+			When you're ready to propose a lab simple click on <%= link_to 'Propose Lab', new_lab_path, class: 'proposeDisclaimer' %> and follow the instructions.
+		</p>
+	</div>
+
+	<% if user_signed_in? %>
+	<div class="col-lg-3 col-sm-12">
+		<div class="well">
+			<p class="lead">Want Skunk Works Emails?</p>
+			<p>If you want emails about Skunk Works events, meetings, and more slide to ON!</p>
+			<p class="lead">SkunkWorks Notices: <input class="bootswitch" data-size="small" type="checkbox" name="notices-checkbox" <%= current_user.meeting_notice ? 'checked' : ''%>>
+		</div>
+	</div>
+	<% end %>
+</div>
+
+<div class="row">
+	<div class="col-lg-6 col-sm-12">
+		<% unless @newest_lab.nil? %>
+		<h3>Newest Lab</h3>
+		<div class="well">
+			<dl class="dl-horizontal">
+				<dt>Lab Name</dt>
+				<dd><%= @newest_lab.name%></dd>
+
+				<dt>Goals</dt>
+				<dd><%= raw(@newest_lab.goals) %></dd>
+
+				<dt>Lab Details</dt>
+				<dd><%= link_to 'More Information', @newest_lab, class: 'btn btn-xs btn-default' %></dd>
+			</dl>
+		</div>
+		<% end %>
+	</div>
+
+	<div class="col-lg-6 col-sm-12">
+		<% unless @latest_lab.nil? %>
+		<h3>Last Updated Lab</h3>
+		<div class="well">
+			<dl class="dl-horizontal">
+				<dt>Lab Name</dt>
+				<dd><%= @latest_lab.name%></dd>
+
+				<dt>Goals</dt>
+				<dd><%= raw(@latest_lab.goals) %></dd>
+
+				<dt>Lab Details</dt>
+				<dd><%= link_to 'More Information', @latest_lab, class: 'btn btn-xs btn-default' %></dd>
+			</dl>
+		</div>
+		<% end %>
+	</div>
+</div>

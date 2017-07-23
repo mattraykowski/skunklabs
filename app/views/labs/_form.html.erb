@@ -1,0 +1,44 @@
+
+<%= form_for(@lab, html: { role: 'form', class: 'form-horizontal' } ) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :founder, class: 'col-sm-3 control-label' %>
+    <div class="col-sm-9">
+      <%= get_user_popover_name(@lab.user) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-sm-3 control-label' %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: 'form-control', placeholder: 'enter a lab name' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :goals, raw('Goals <a class="help-tip " tip-url="/partials/help/goals.html">?</a>'), class: 'col-sm-3 control-label' %>
+    <div class="col-sm-9 well">
+      <%= f.text_area :goals, class: 'form-control bswysiwyg', rows: 8, placeholder: 'enter the goal(s) of the lab' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :measurements, raw('Measurements <a class="help-tip " tip-url="/partials/help/measurements.html">?</a>'), class: 'col-sm-3 control-label' %>
+    <div class="col-sm-9 well">
+      <%= f.text_area :measurements, class: 'form-control bswysiwyg', rows: 5, placeholder: 'enter the measurements that determine the success of the lab' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :focus_area, raw('Focus Area <a class="help-tip " tip-url="/partials/help/focus.html">?</a>'), class: 'col-sm-3 control-label' %>
+    <div class="col-sm-9">
+      <%= f.collection_select :focus_type_id, FocusType.all, :id, :name, {}, { class: 'form-control' } %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <%= f.submit class: 'btn btn-sm btn-success' %>
+    </div>
+  </div>
+<% end %>

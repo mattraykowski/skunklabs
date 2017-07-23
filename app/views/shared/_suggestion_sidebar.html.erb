@@ -1,0 +1,24 @@
+<div class="well">
+  <p class="lead">Suggestions</p>
+  <ul class="list-unstyled">
+  	<% if user_signed_in? %>
+  	  <li><a href="">My Suggestions</a> <span class="badge"><%= @suggestion_sidebar_mine %></span></li>
+  	<% end %>
+  	<li>
+  		<%= link_to 'All', suggestions_path( by: 'all') %> <span class="badge"><%= Suggestion.count() %></span>
+  	</li>
+  	<li>
+  		<%= link_to 'Active', suggestions_path %> <span class="badge"><%= Suggestion.joins(:status).merge(SuggestionState.where(done: false)).count() %></span>
+  	</li>
+  </ul>
+  	
+  <p class="lead">Filter By State</p>
+  <ul class="list-unstyled">
+  	
+  	<% @suggestion_states_sidebar.each do |state| %>
+  	  <li>
+  		<%= link_to state.name.capitalize, suggestions_path( by: state.id ) %> <span class="badge"><%= Suggestion.where('status_id = ?', state.id).count() %></span>
+  	  </li>
+    <% end %>
+  </ul>
+</div>

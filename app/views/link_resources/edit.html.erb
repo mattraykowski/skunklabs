@@ -1,0 +1,14 @@
+<div class="col-lg-3">
+  <%= render 'shared/sidebar' %>
+</div>
+
+<div class="col-lg-9">
+  <%= render partial: 'shared/form_errors', locals: { resource: @link_resource } %>
+  <div class= "col-sm-offset-2 col-sm-10">
+    <h2>Editing Link
+      <%= link_to 'Back to Lab', @lab, class: 'btn btn-sm btn-default' %></h2>
+  </div>
+
+  <%= render 'form' %>
+
+</div>

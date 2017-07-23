@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to 'Skunk Labs', root_path, class: 'navbar-brand' %>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+
+      <% if user_signed_in? %>
+      <li class="dropdown">
+      	<a class="dropdown-toggle" data-toggle="dropdown">Labs <b class="caret"></b></a>
+      	<ul class="dropdown-menu">
+      	  <li><%= link_to 'Browse Labs', labs_path %></li>
+      	  <li><%= link_to 'Propose Lab', new_lab_path, class: 'proposeDisclaimer' %></li>
+      	</ul>
+      </li>
+      <% else %>
+      <li><%= link_to 'Browse Labs', labs_path %></li>
+      <% end %>
+      <li><%= link_to 'Suggestions', suggestions_path %></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to 'About', pages_about_path %></li>
+      <% if user_signed_in? %>
+        <% if current_user.admin %>
+          <li class="dropdown">
+      	    <a class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+      	    <ul class="dropdown-menu">
+      	      <li><%= link_to 'Role Types', role_types_path %></li>
+      	      <li><%= link_to 'Focus Types', focus_types_path %></li>
+      	      <li><%= link_to 'Suggestion States', suggestion_states_path %></li>
+      	      <li><%= link_to 'Users', users_path %></li>
+              <li><%= link_to 'Notice List', noticelist_users_path %></li>
+      	    </ul>
+      	  </li>
+      	<% end %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown"><%= current_user.safe_name %> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to 'Profile', profile_show_path %></li>
+          </ul>
+        </li>
+
+      <% else %>
+      <li><%= link_to 'Login', new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>

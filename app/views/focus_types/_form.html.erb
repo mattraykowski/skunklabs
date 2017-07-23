@@ -1,0 +1,35 @@
+<%= form_for(@focus_type, html: { role: 'form', class: 'form-horizontal' }) do |f| %>
+  <% if @focus_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@focus_type.errors.count, "error") %> prohibited this focus_type from being saved:</h2>
+
+      <ul>
+      <% @focus_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: 'col-sm-offset-2 col-sm-10' %>
+  </div>
+  <div class="form-group">
+  	<div class="col-sm-offset-2 col-sm-10">
+      <div class="well">
+      	<%= f.text_area :description, class: 'form-control bswysiwyg', rows: 5, placeholder: 'enter a detailed description of the types of labs that will have this focus type'  %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+  	<div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

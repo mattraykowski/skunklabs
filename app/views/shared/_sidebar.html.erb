@@ -1,0 +1,25 @@
+<div class="well">
+  <% if user_signed_in? %>
+  <div>
+    <p class="lead">My Labs</p>
+    <ul class="list-unstyled" ng-show="loggedIn">
+      <li><%= link_to 'My Labs', labs_path( by: 'me' ) %> <span class="badge"><%= @sidebar_counts[:me] %></span></li>
+      <!-- <li><a href="#">Supported Labs</a> <span class="badge">4</span></li> -->
+    </ul>
+  </div>
+  <% end %>
+
+  <p class="lead">All Labs</p>
+  <ul class="list-unstyled">
+    <li><%= link_to 'Proposed', labs_path( by: Lab::PROPOSED ) %> <span class="badge"><%= @sidebar_counts[:proposed] %></span></li>
+    <li><%= link_to 'Started', labs_path( by: Lab::STARTED ) %> <span class="badge"><%= @sidebar_counts[:started] %></span></li>
+    <li><%= link_to 'Completed', labs_path( by: Lab::COMPLETED ) %> <span class="badge"><%= @sidebar_counts[:completed] %></span></li>
+    <li><%= link_to 'Blocked', labs_path( by: Lab::BLOCKED ) %> <span class="badge"><%= @sidebar_counts[:blocked] %></span></li>
+    <li><%= link_to 'Abandoned', labs_path( by: Lab::ABANDONED ) %> <span class="badge"><%= @sidebar_counts[:abandoned] %></span></li>
+  </ul>
+
+  <p class="lead">Reports</p>
+  <ul class="list-unstyled">
+    <li><%= link_to 'Recent Updates', recent_updates_path %></li>
+  </ul>
+</div>

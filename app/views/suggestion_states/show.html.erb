@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @suggestion_state.name %>
+</p>
+
+<p>
+  <strong>Done:</strong>
+  <%= @suggestion_state.done %>
+</p>
+
+<%= link_to 'Edit', edit_suggestion_state_path(@suggestion_state) %> |
+<%= link_to 'Back', suggestion_states_path %>

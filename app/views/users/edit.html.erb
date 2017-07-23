@@ -1,0 +1,35 @@
+<div class="col-lg-offset-2 col-lg-8"> 
+  <h1>Editing User<small><%= link_to 'Back to Users', users_path, class: 'btn btn-xs btn-default' %></small></h1>
+
+  <input type="hidden" name="user_id" value="<%= @user.id %>">
+
+  <div class="row">
+  	<label class="col-sm-3 control-label">Name</label>
+  	<div class="col-sm-9">
+  	  <%= get_user_popover_name(@user) %>
+  	</div>
+  </div>
+  
+  <div class="row row-form">
+  	<label class="col-sm-3 control-label">Is Admin?</label>
+  	<div class="col-sm-9">
+  	  <input class="bootswitch" data-size="small" type="checkbox" name="admin-checkbox" <%= @user.admin ? 'checked' : ''%>>
+  	</div>
+  </div>
+  
+  <div class="row row-form">
+  	<label class="col-sm-3 control-label">Is Suggestion Team Member?</label>
+  	<div class="col-sm-9">
+  	  <input class="bootswitch" data-size="small" type="checkbox" name="team-checkbox" <%= @user.suggestion_team_member ? 'checked' : ''%>>
+  	</div>
+  </div>
+
+  <div class="row row-form">
+    <label class="col-sm-3 control-label">Wants Meeting Emails?</label>
+    <div class="col-sm-9">
+      <input class="bootswitch" data-size="small" type="checkbox" name="notices-checkbox" <%= @user.meeting_notice ? 'checked' : ''%>>
+    </div>
+  </div>
+
+</div>
+

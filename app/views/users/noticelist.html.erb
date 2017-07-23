@@ -1,0 +1,22 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th data-toggle="tooltip" data-placement="top" data-container="body" data-title="Wants SkunkWorks Info?">SkunkWorks Notices</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= get_user_popover_name(user, edit_user_path(user)) %></td>
+        <td>
+          <input class="bootswitch" data-size="small" type="checkbox" name="team-checkbox" <%= user.suggestion_team_member ? 'checked' : ''%>>        </td>
+        <td class="text-right">
+          <%= link_to raw('<i class="glyphicon glyphicon-edit"></i>'), edit_user_path(user), class: 'btn btn-xs btn-default' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
