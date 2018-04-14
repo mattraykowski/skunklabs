@@ -284,3 +284,6 @@ DEPENDENCIES
   syntax
   turbolinks
   uglifier
+
+BUNDLED WITH
+   1.16.1

@@ -11,9 +11,9 @@
  *= require bootstrap/dist/css/bootstrap
  *= require bootstrap/dist/css/bootstrap-theme
  *= require bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5
- *= require seiyria-bootstrap-slider/css/bootstrap-slider
+ *= require seiyria-bootstrap-slider/dist/css/bootstrap-slider
  *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch
- *= require font-awesome/css/font-awesome.css
+ *= require font-awesome/web-fonts-with-css/css/fontawesome.css
  *= require_self
  */
 

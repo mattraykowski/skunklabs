@@ -15,10 +15,10 @@
 //= require jquery_ujs
 //= require handlebars/handlebars.runtime
 //= require bootstrap/dist/js/bootstrap
-//= require bootbox/bootbox
-//= require wysihtml5/dist/wysihtml5-0.2.0
+//= require bootbox.js/bootbox
+//= require wysihtml5x/dist/wysihtml5x
 //= require bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min
-//= require seiyria-bootstrap-slider/js/bootstrap-slider
+//= require seiyria-bootstrap-slider/dist/bootstrap-slider
 //= require bootstrap-switch/dist/js/bootstrap-switch
 //= require turbolinks
 
