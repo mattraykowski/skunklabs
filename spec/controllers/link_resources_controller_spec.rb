@@ -50,7 +50,7 @@ describe LinkResourcesController do
 
         it "should redirect to the lab" do
           get :new, {lab_id: @lab.id}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -61,7 +61,7 @@ describe LinkResourcesController do
       end
       it "should redirect to login" do
         get :new, {lab_id: @lab.id}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -91,7 +91,7 @@ describe LinkResourcesController do
 
         it "should redirect to the lab" do
           get :edit, {lab_id: @lab.id, id: @link_resource.to_param}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -102,7 +102,7 @@ describe LinkResourcesController do
       end
       it "should redirect to login" do
         get :new, {lab_id: @lab.id}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -145,13 +145,13 @@ describe LinkResourcesController do
           end
 
           it "assigns a newly created but unsaved link_resource as @link_resource" do
-            LinkResource.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(LinkResource).to receive(:save).and_return(false)
             post :create, {lab_id: @lab.id, link_resource: @attrs}
             expect(assigns(:link_resource)).to be_a_new(LinkResource)
           end
 
           it "re-renders the 'new' template" do
-            LinkResource.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(LinkResource).to receive(:save).and_return(false)
             post :create, {lab_id: @lab.id, link_resource: @attrs}
             expect(response).to render_template("new")
           end
@@ -168,7 +168,7 @@ describe LinkResourcesController do
 
       it "should redirect to login" do
         post :create, {lab_id: @lab.id, link_resource: @attrs}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -185,7 +185,7 @@ describe LinkResourcesController do
 
         describe "with valid params" do
           it "updates the requested link_resource" do
-            LinkResource.any_instance.should_receive(:update).with({ "name" => "test" })
+            allow_any_instance_of(LinkResource).to receive(:update).with({ "name" => "test" })
             put :update, {lab_id: @lab.id, id: @link_resource.to_param, link_resource: { "name" => "test" }}
           end
 
@@ -222,7 +222,7 @@ describe LinkResourcesController do
 
       it "should redirect to login" do
         put :update, {lab_id: @lab.id, id: @link_resource.to_param, link_resource: { "name" => "test" }}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

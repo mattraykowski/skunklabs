@@ -5,12 +5,12 @@ describe SuggestionState do
   subject { @suggestion_state }
 
   # Check attributes.
-  it { should respond_to :name }
-  it { should respond_to :done }
+  it { is_expected.to respond_to :name }
+  it { is_expected.to respond_to :done }
   
   describe 'when name is not present' do
     before(:each) { @suggestion_state.name = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 end

@@ -11,7 +11,7 @@ describe LabSupportersController do
 
     it "assigns all lab_supporters as @lab_supporters" do
       get :supporters, {lab_id: @lab.id}
-      assigns(:lab_supporters).should eq([@lab_supporter])
+      expect(assigns(:lab_supporters)).to eq([@lab_supporter])
     end
   end
 
@@ -23,13 +23,13 @@ describe LabSupportersController do
     describe 'GET support' do
       it 'should redirect to login' do
         get :support, {lab_id: 1}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
     describe 'GET unsupport' do
       it 'should redirect to login' do
         get :unsupport, {lab_id: 1}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -50,7 +50,7 @@ describe LabSupportersController do
       describe 'GET support' do
         it 'should redirect to the lab' do
           get :support, {lab_id: 1}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
 
         it 'should not add support' do
@@ -62,7 +62,7 @@ describe LabSupportersController do
       describe 'GET unsupport' do
         it 'should redirect to the lab' do
           get :unsupport, {lab_id: 1}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
 
         describe 'when supporting' do
@@ -86,7 +86,7 @@ describe LabSupportersController do
       describe 'GET support' do
         it 'should redirect to the lab' do
           get :support, {lab_id: 1}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
 
         it 'should not add support' do
@@ -100,7 +100,7 @@ describe LabSupportersController do
 
         it 'should redirect to the lab' do
           get :unsupport, {lab_id: 1}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
 
         it 'should remove support' do

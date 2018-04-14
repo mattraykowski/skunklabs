@@ -4,13 +4,13 @@ describe User do
   before(:each) { @user = FactoryGirl.create(:user) }
   subject { @user }
 
-  it { should respond_to :email }
-  it { should respond_to :password }
-  it { should respond_to :password_confirmation }
-  it { should respond_to :admin }
-  it { should respond_to :suggestion_team_member }
-  it { should respond_to :supports }
-  it { should respond_to :meeting_notice }
+  it { is_expected.to respond_to :email }
+  it { is_expected.to respond_to :password }
+  it { is_expected.to respond_to :password_confirmation }
+  it { is_expected.to respond_to :admin }
+  it { is_expected.to respond_to :suggestion_team_member }
+  it { is_expected.to respond_to :supports }
+  it { is_expected.to respond_to :meeting_notice }
 
   # named scopes
   it 'should respond to all_team_members' do

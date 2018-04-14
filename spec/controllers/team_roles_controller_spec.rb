@@ -9,7 +9,7 @@ describe TeamRolesController do
     end
     it "assigns all team_roles as @team_roles" do
       get :index, {lab_id: @lab.id}
-      assigns(:team_roles).should eq([@team_role])
+      expect(assigns(:team_roles)).to eq([@team_role])
     end
   end
 
@@ -21,7 +21,7 @@ describe TeamRolesController do
 
     it "assigns the requested team_role as @team_role" do
       get :show, {lab_id: @lab.id, id: @team_role.to_param}
-      assigns(:team_role).should eq(@team_role)
+      expect(assigns(:team_role)).to eq(@team_role)
     end
   end
 
@@ -37,7 +37,7 @@ describe TeamRolesController do
 
         it "assigns a new team_role as @team_role" do
           get :new, {lab_id: @lab.id}
-          assigns(:team_role).should be_a_new(TeamRole)
+          expect(assigns(:team_role)).to be_a_new(TeamRole)
         end
       end
 
@@ -50,7 +50,7 @@ describe TeamRolesController do
 
         it "should redirect to the lab" do
           get :new, {lab_id: @lab.id}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -61,7 +61,7 @@ describe TeamRolesController do
       end
       it "should redirect to login" do
         get :new, {lab_id: @lab.id}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -78,7 +78,7 @@ describe TeamRolesController do
 
         it "assigns the requested team_role as @team_role" do
           get :edit, {lab_id: @lab.id, id: @team_role.to_param}
-          assigns(:team_role).should eq(@team_role)
+          expect(assigns(:team_role)).to eq(@team_role)
         end
       end
 
@@ -91,7 +91,7 @@ describe TeamRolesController do
 
         it "should redirect to the lab" do
           get :edit, {lab_id: @lab.id, id: @team_role.to_param}
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
 
@@ -104,7 +104,7 @@ describe TeamRolesController do
       end
       it "should redirect to login" do
         get :edit, {lab_id: @lab.id, id: @team_role.to_param}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -131,13 +131,13 @@ describe TeamRolesController do
 
           it "assigns a newly created team_role as @team_role" do
             post :create, {lab_id: @lab.id, team_role: @attrs}
-            assigns(:team_role).should be_a(TeamRole)
-            assigns(:team_role).should be_persisted
+            expect(assigns(:team_role)).to be_a(TeamRole)
+            expect(assigns(:team_role)).to be_persisted
           end
 
           it "redirects to the created team_role" do
             post :create, {lab_id: @lab.id, team_role: @attrs}
-            response.should redirect_to(lab_team_roles_path(@lab))
+            expect(response).to redirect_to(lab_team_roles_path(@lab))
           end
         end
 
@@ -151,16 +151,16 @@ describe TeamRolesController do
 
           it "assigns a newly created but unsaved team_role as @team_role" do
             # Trigger the behavior that occurs when invalid params are submitted
-            TeamRole.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(TeamRole).to receive(:save).and_return(false)
             post :create, {lab_id: @lab.id, team_role: @attrs}
-            assigns(:team_role).should be_a_new(TeamRole)
+            expect(assigns(:team_role)).to be_a_new(TeamRole)
           end
 
           it "re-renders the 'new' template" do
             # Trigger the behavior that occurs when invalid params are submitted
-            TeamRole.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(TeamRole).to receive(:save).and_return(false)
             post :create, {lab_id: @lab.id, team_role: @attrs}
-            response.should render_template("new")
+            expect(response).to render_template("new")
           end
         end
       end
@@ -177,7 +177,7 @@ describe TeamRolesController do
         it "should redirect to the lab" do
           post :create, { lab_id: @lab.id, team_role: @attrs }
 
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -192,7 +192,7 @@ describe TeamRolesController do
       it "should redirect to login" do
         post :create, { lab_id: @lab.id, team_role: @attrs }
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -213,34 +213,34 @@ describe TeamRolesController do
             # specifies that the TeamRole created on the previous line
             # receives the :update_attributes message with whatever params are
             # submitted in the request.
-            TeamRole.any_instance.should_receive(:update).with({ "comment" => "test" })
+            allow_any_instance_of(TeamRole).to receive(:update).with({ "comment" => "test" })
             put :update, {lab_id: @lab.id, id: @team_role.to_param, team_role: { "comment" => "test" }}
           end
 
           it "assigns the requested team_role as @team_role" do
             put :update, {lab_id: @lab.id, id: @team_role.to_param, team_role: { "comment" => "test" }}
-            assigns(:team_role).should eq(@team_role)
+            expect(assigns(:team_role)).to eq(@team_role)
           end
 
           it "redirects to the team roles list for the lab" do
             put :update, {lab_id: @lab.id, id: @team_role.to_param, team_role: { "comment" => "test" }}
-            response.should redirect_to(lab_team_roles_path(@lab))
+            expect(response).to redirect_to(lab_team_roles_path(@lab))
           end
         end
 
         describe "with invalid params" do
           it "assigns the team_role as @team_role" do
             # Trigger the behavior that occurs when invalid params are submitted
-            TeamRole.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(TeamRole).to receive(:save).and_return(false)
             put :update, {lab_id: @lab.id, id: @team_role.to_param, team_role: { "lab_id" => "invalid value" }}
-            assigns(:team_role).should eq(@team_role)
+            expect(assigns(:team_role)).to eq(@team_role)
           end
 
           it "re-renders the 'edit' template" do
             # Trigger the behavior that occurs when invalid params are submitted
-            TeamRole.any_instance.stub(:save).and_return(false)
+            allow_any_instance_of(TeamRole).to receive(:save).and_return(false)
             put :update, {lab_id: @lab.id, id: @team_role.to_param, team_role: { "lab_id" => "invalid value" }}
-            response.should render_template("edit")
+            expect(response).to render_template("edit")
           end
         end
       end
@@ -255,7 +255,7 @@ describe TeamRolesController do
         it "should redirect to the lab" do
           post :update, { lab_id: @lab.id, id: @team_role.id }
 
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -269,7 +269,7 @@ describe TeamRolesController do
       it "should redirect to login" do
         post :update, { lab_id: @lab.id, id: @team_role.id }
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -293,7 +293,7 @@ describe TeamRolesController do
 
         it "redirects to the team_roles list" do
           delete :destroy, {lab_id: @lab.id, id: @team_role.to_param}
-          response.should redirect_to(lab_team_roles_path(@lab))
+          expect(response).to redirect_to(lab_team_roles_path(@lab))
         end
       end
 
@@ -307,7 +307,7 @@ describe TeamRolesController do
         it "should redirect to the lab" do
           delete :destroy, {lab_id: @lab.id, id: @team_role.to_param}
 
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
     end
@@ -321,7 +321,7 @@ describe TeamRolesController do
       it "should redirect to login" do
         delete :destroy, {lab_id: @lab.id, id: @team_role.to_param}
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 

@@ -30,7 +30,7 @@ describe SuggestionStatesController do
     it "assigns all suggestion_states as @suggestion_states" do
       suggestion_state = FactoryGirl.create(:suggestion_state)
       get :index, {}
-      assigns(:suggestion_states).should eq([suggestion_state])
+      expect(assigns(:suggestion_states)).to eq([suggestion_state])
     end
   end
 
@@ -38,14 +38,14 @@ describe SuggestionStatesController do
     it "assigns the requested suggestion_state as @suggestion_state" do
       suggestion_state = FactoryGirl.create(:suggestion_state)
       get :show, {:id => suggestion_state.to_param}
-      assigns(:suggestion_state).should eq(suggestion_state)
+      expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
   end
 
   describe "GET new" do
     it "assigns a new suggestion_state as @suggestion_state" do
       get :new, {}
-      assigns(:suggestion_state).should be_a_new(SuggestionState)
+      expect(assigns(:suggestion_state)).to be_a_new(SuggestionState)
     end
   end
 
@@ -53,7 +53,7 @@ describe SuggestionStatesController do
     it "assigns the requested suggestion_state as @suggestion_state" do
       suggestion_state = FactoryGirl.create(:suggestion_state)
       get :edit, {:id => suggestion_state.to_param}
-      assigns(:suggestion_state).should eq(suggestion_state)
+      expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
   end
 
@@ -67,29 +67,29 @@ describe SuggestionStatesController do
 
       it "assigns a newly created suggestion_state as @suggestion_state" do
         post :create, {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
-        assigns(:suggestion_state).should be_a(SuggestionState)
-        assigns(:suggestion_state).should be_persisted
+        expect(assigns(:suggestion_state)).to be_a(SuggestionState)
+        expect(assigns(:suggestion_state)).to be_persisted
       end
 
       it "redirects to the created suggestion_state" do
         post :create, {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
-        response.should redirect_to(SuggestionState.last)
+        expect(response).to redirect_to(SuggestionState.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved suggestion_state as @suggestion_state" do
         # Trigger the behavior that occurs when invalid params are submitted
-        SuggestionState.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
         post :create, {:suggestion_state => { "name" => "" }}
-        assigns(:suggestion_state).should be_a_new(SuggestionState)
+        expect(assigns(:suggestion_state)).to be_a_new(SuggestionState)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        SuggestionState.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
         post :create, {:suggestion_state => { "name" => "" }}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -103,34 +103,34 @@ describe SuggestionStatesController do
         # specifies that the SuggestionState created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        SuggestionState.any_instance.should_receive(:update).with({ "name" => "MyString" })
+        allow_any_instance_of(SuggestionState).to receive(:update).with({ "name" => "MyString" })
         put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "MyString" }}
       end
 
       it "assigns the requested suggestion_state as @suggestion_state" do
         put :update, {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
-        assigns(:suggestion_state).should eq(@suggestion_state)
+        expect(assigns(:suggestion_state)).to eq(@suggestion_state)
       end
 
       it "redirects to the suggestion_state" do
         put :update, {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
-        response.should redirect_to(@suggestion_state)
+        expect(response).to redirect_to(@suggestion_state)
       end
     end
 
     describe "with invalid params" do      
       it "assigns the suggestion_state as @suggestion_state" do
         # Trigger the behavior that occurs when invalid params are submitted
-        SuggestionState.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
         put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
-        assigns(:suggestion_state).should eq(@suggestion_state)
+        expect(assigns(:suggestion_state)).to eq(@suggestion_state)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        SuggestionState.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
         put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -146,7 +146,7 @@ describe SuggestionStatesController do
 
     it "redirects to the suggestion_states list" do
       delete :destroy, {:id => @suggestion_state.to_param}
-      response.should redirect_to(suggestion_states_url)
+      expect(response).to redirect_to(suggestion_states_url)
     end
   end
 

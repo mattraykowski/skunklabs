@@ -8,7 +8,7 @@ describe SuggestionVotesController do
     describe "when not voted for already" do
       it "redirects to all suggestions" do
         get :vote, {id: @suggestion.to_param}
-        response.should redirect_to suggestions_path
+        expect(response).to redirect_to suggestions_path
       end
 
       it "adds a new vote" do
@@ -19,7 +19,7 @@ describe SuggestionVotesController do
 
       it "adds a flash notice notifying the user about their vote" do
         get :vote, {id: @suggestion.to_param}
-        flash[:notice].should =~ /Voted for/i
+        expect(flash[:notice]).to match(/Voted for/i)
       end
     end
 
@@ -28,12 +28,12 @@ describe SuggestionVotesController do
 
       it "redirects to all suggestions" do
         get :vote, {id: @suggestion.to_param}
-        response.should redirect_to suggestions_path
+        expect(response).to redirect_to suggestions_path
       end
 
       it "adds a flash notice notifying the user about their vote" do
         get :vote, {id: @suggestion.to_param}
-        flash[:alert].should =~ /Problem: /i
+        expect(flash[:alert]).to match(/Problem: /i)
       end
     end
   end
@@ -43,7 +43,7 @@ describe SuggestionVotesController do
 
     it "redirects to all suggestions" do
       delete :unvote, {id: @suggestion.id}
-      response.should redirect_to suggestions_path
+      expect(response).to redirect_to suggestions_path
     end
     it "removes a vote" do
       expect {

@@ -10,19 +10,19 @@ describe LabSupporter do
   subject { @lab_supporter }
 
   # Check attributes.
-  it { should respond_to :lab }
-  it { should respond_to :user }
+  it { is_expected.to respond_to :lab }
+  it { is_expected.to respond_to :user }
 
   describe 'when lab is not present' do
     before(:each) { @lab_supporter.lab = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe 'when user is not present' do
     before(:each) { @lab_supporter.user = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 
   describe "when a user tries to support a lab twice" do

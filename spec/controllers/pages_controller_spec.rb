@@ -10,17 +10,17 @@ describe PagesController do
 
     it "returns http success" do
       get :index
-      response.should be_success
+      expect(response).to be_success
     end
 
     it 'should provide newest lab' do
       get :index
-      assigns(:newest_lab).should eq(@lab)
+      expect(assigns(:newest_lab)).to eq(@lab)
     end
 
     it 'should provide the most recently updated lab' do
       get :index
-      assigns(:latest_lab).should eq(@lab)
+      expect(assigns(:latest_lab)).to eq(@lab)
 
     end
   end
@@ -33,7 +33,7 @@ describe PagesController do
 
     it 'should return comments' do
       get :recent_updates
-      assigns(:recent_updates).should eq([@comment])
+      expect(assigns(:recent_updates)).to eq([@comment])
     end
   end
 

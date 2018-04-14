@@ -4,5 +4,6 @@ FactoryGirl.define do
     password "testpassword"
     password_confirmation "testpassword"
     login 'testuser'
+    confirmed_at DateTime.now
   end
 end

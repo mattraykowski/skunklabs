@@ -8,7 +8,7 @@ describe SuggestionVote do
     @suggestion_vote = FactoryGirl.create(:suggestion_vote, suggestion: @suggestion, user: @user)
   end
 
-  it { should respond_to :suggestion }
-  it { should respond_to :user }
+  it { is_expected.to respond_to :suggestion }
+  it { is_expected.to respond_to :user }
 
 end

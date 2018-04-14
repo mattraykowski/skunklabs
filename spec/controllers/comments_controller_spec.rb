@@ -21,7 +21,7 @@ describe CommentsController do
     it "assigns all comments as @comments" do
       #@comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
       get :index, {lab_id: @lab.id}
-      assigns(:comments).should eq([@comment])
+      expect(assigns(:comments)).to eq([@comment])
     end
   end
 
@@ -33,7 +33,7 @@ describe CommentsController do
 
     it "assigns the requested comment as @comment" do
       get :show, {lab_id: @lab.id, id: @comment.to_param}
-      assigns(:comment).should eq(@comment)
+      expect(assigns(:comment)).to eq(@comment)
     end
   end
 
@@ -44,7 +44,7 @@ describe CommentsController do
 
       it "assigns a new comment as @comment" do
         get :new, {lab_id: @lab.id}
-        assigns(:comment).should be_a_new(Comment)
+        expect(assigns(:comment)).to be_a_new(Comment)
       end
     end
 
@@ -54,7 +54,7 @@ describe CommentsController do
       it 'should redirect to sign in' do
         get :new, {lab_id: @lab.id}
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -70,7 +70,7 @@ describe CommentsController do
       it "assigns the requested comment as @comment" do
 
         get :edit, {lab_id: @lab.id, id: @comment.to_param}
-        assigns(:comment).should eq(@comment)
+        expect(assigns(:comment)).to eq(@comment)
       end
     end
 
@@ -83,7 +83,7 @@ describe CommentsController do
       it 'should redirect to sign in' do
         get :edit, {lab_id: @lab.id, id: @comment.to_param}
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -107,13 +107,13 @@ describe CommentsController do
 
         it "assigns a newly created comment as @comment" do
           post :create, { lab_id: @lab.id, comment: @attrs }
-          assigns(:comment).should be_a(Comment)
-          assigns(:comment).should be_persisted
+          expect(assigns(:comment)).to be_a(Comment)
+          expect(assigns(:comment)).to be_persisted
         end
 
         it "redirects to the comment's lab" do
           post :create, { lab_id: @lab.id, comment: @attrs }
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
 
@@ -124,16 +124,16 @@ describe CommentsController do
 
         it "assigns a newly created but unsaved comment as @comment" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Comment.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Comment).to receive(:save).and_return(false)
           post :create, {lab_id: @lab.id, comment: { lab_id: @lab.id, "user_id" => "invalid value" }}
-          assigns(:comment).should be_a_new(Comment)
+          expect(assigns(:comment)).to be_a_new(Comment)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Comment.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Comment).to receive(:save).and_return(false)
           post :create, {lab_id: @lab.id, comment: { lab_id: @lab.id, "user_id" => "invalid value" }}
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -148,7 +148,7 @@ describe CommentsController do
       it 'should redirect to sign in' do
         post :create, { lab_id: @lab.id, comment: @attrs }
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -168,36 +168,36 @@ describe CommentsController do
           # specifies that the Comment created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          Comment.any_instance.should_receive(:update).with({ "user_id" => "1" })
+          allow_any_instance_of(Comment).to receive(:update).with({ "user_id" => "1" })
           put :update, {lab_id: @lab.id, id: @comment.to_param, comment: { "user_id" => "1" }}
         end
 
         it "assigns the requested comment as @comment" do
           put :update, {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
 
-          assigns(:comment).should eq(@comment)
+          expect(assigns(:comment)).to eq(@comment)
         end
 
         it "redirects to the lab" do
           put :update, {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
 
-          response.should redirect_to(@lab)
+          expect(response).to redirect_to(@lab)
         end
       end
 
       describe "with invalid params" do
         it "assigns the comment as @comment" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Comment.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Comment).to receive(:save).and_return(false)
           put :update, {lab_id: @lab.id, id: @comment.to_param, comment: { "comment" => "" }}
-          assigns(:comment).should eq(@comment)
+          expect(assigns(:comment)).to eq(@comment)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Comment.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Comment).to receive(:save).and_return(false)
           put :update, {lab_id: @lab.id, id: @comment.to_param, comment: { "comment" => "" }}
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
     end
@@ -212,12 +212,12 @@ describe CommentsController do
 
       it 'should not change the comment' do
         put :update, {lab_id: @lab.id, id: @comment.to_param, comment: { "comment" => "random comment" }}
-        assigns(:comment).should eq(@comment)
+        expect(assigns(:comment)).to eq(@comment)
       end
 
       it 'should redirect to the lab' do
         put :update, {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
-        response.should redirect_to(@lab)
+        expect(response).to redirect_to(@lab)
       end
     end
 
@@ -230,7 +230,7 @@ describe CommentsController do
       it 'should redirect to sign in' do
         put :update, {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
 
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -251,7 +251,7 @@ describe CommentsController do
 
       it "redirects to the comments list" do
         delete :destroy, {lab_id: @lab.id, id: @comment.to_param}
-        response.should redirect_to @lab
+        expect(response).to redirect_to @lab
       end
     end
 
@@ -271,7 +271,7 @@ describe CommentsController do
 
       it 'should redirect to the lab' do
         delete :destroy, {lab_id: @lab.id, id: @comment.to_param}
-        response.should redirect_to @lab
+        expect(response).to redirect_to @lab
       end
     end
   end
@@ -284,7 +284,7 @@ describe CommentsController do
     it 'should redirect to sign in' do
       delete :destroy, {lab_id: @lab.id, id: @comment.to_param}
 
-      response.should redirect_to(new_user_session_path)
+      expect(response).to redirect_to(new_user_session_path)
     end
   end
 

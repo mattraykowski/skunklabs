@@ -13,7 +13,7 @@ describe RoleTypesController do
       
       it "assigns all role_types as @role_types" do
         get :index, {}
-        assigns(:role_types).should eq([@role_type])
+        expect(assigns(:role_types)).to eq([@role_type])
       end
     end
 
@@ -28,7 +28,7 @@ describe RoleTypesController do
     describe "GET new" do
       it "assigns a new role_type as @role_type" do
         get :new, {}
-        assigns(:role_type).should be_a_new(RoleType)
+        expect(assigns(:role_type)).to be_a_new(RoleType)
       end
     end
 
@@ -37,7 +37,7 @@ describe RoleTypesController do
       
       it "assigns the requested role_type as @role_type" do
         get :edit, {id: @role_type.to_param}
-        assigns(:role_type).should eq(@role_type)
+        expect(assigns(:role_type)).to eq(@role_type)
       end
     end
 
@@ -51,29 +51,29 @@ describe RoleTypesController do
 
         it "assigns a newly created role_type as @role_type" do
           post :create, {role_type: FactoryGirl.attributes_for(:role_type)}
-          assigns(:role_type).should be_a(RoleType)
-          assigns(:role_type).should be_persisted
+          expect(assigns(:role_type)).to be_a(RoleType)
+          expect(assigns(:role_type)).to be_persisted
         end
 
         it "redirects to the created role_type" do
           post :create, {role_type: FactoryGirl.attributes_for(:role_type)}
-          response.should redirect_to(RoleType.last)
+          expect(response).to redirect_to(RoleType.last)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved role_type as @role_type" do
         # Trigger the behavior that occurs when invalid params are submitted
-          RoleType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(RoleType).to receive(:save).and_return(false)
           post :create, {role_type: { "name" => "" }}
-          assigns(:role_type).should be_a_new(RoleType)
+          expect(assigns(:role_type)).to be_a_new(RoleType)
         end
 
         it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-          RoleType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(RoleType).to receive(:save).and_return(false)
           post :create, {role_type: { "name" => "" }}
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -87,34 +87,34 @@ describe RoleTypesController do
           # specifies that the RoleType created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          RoleType.any_instance.should_receive(:update).with({ "name" => "MyString" })
+          allow_any_instance_of(RoleType).to receive(:update).with({ "name" => "MyString" })
           put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
         end
 
         it "assigns the requested role_type as @role_type" do
           put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
-          assigns(:role_type).should eq(@role_type)
+          expect(assigns(:role_type)).to eq(@role_type)
         end
 
         it "redirects to the role_type" do
           put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
-          response.should redirect_to(@role_type)
+          expect(response).to redirect_to(@role_type)
         end
       end
 
       describe "with invalid params" do
         it "assigns the role_type as @role_type" do
           # Trigger the behavior that occurs when invalid params are submitted
-          RoleType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(RoleType).to receive(:save).and_return(false)
           put :update, {id: @role_type.to_param, :role_type => { "name" => "" }}
-          assigns(:role_type).should eq(@role_type)
+          expect(assigns(:role_type)).to eq(@role_type)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          RoleType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(RoleType).to receive(:save).and_return(false)
           put :update, {id: @role_type.to_param, :role_type => { "name" => "" }}
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
     end
@@ -130,7 +130,7 @@ describe RoleTypesController do
 
       it "redirects to the role_types list" do
         delete :destroy, {id: @role_type.to_param}
-        response.should redirect_to(role_types_url)
+        expect(response).to redirect_to(role_types_url)
       end
     end
 

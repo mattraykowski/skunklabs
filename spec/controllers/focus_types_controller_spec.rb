@@ -13,7 +13,7 @@ describe FocusTypesController do
       
       it "assigns all focus_types as @focus_types" do
         get :index, {}
-        assigns(:focus_types).should eq([@focus_type])
+        expect(assigns(:focus_types)).to eq([@focus_type])
       end
     end
 
@@ -22,14 +22,14 @@ describe FocusTypesController do
       
       it "assigns the requested focus_type as @focus_type" do
         get :show, {id: @focus_type.to_param}
-        assigns(:focus_type).should eq(@focus_type)
+        expect(assigns(:focus_type)).to eq(@focus_type)
       end
     end
 
     describe "GET new" do
       it "assigns a new focus_type as @focus_type" do
         get :new, {}
-        assigns(:focus_type).should be_a_new(FocusType)
+        expect(assigns(:focus_type)).to be_a_new(FocusType)
       end
     end
 
@@ -38,7 +38,7 @@ describe FocusTypesController do
       
       it "assigns the requested focus_type as @focus_type" do
         get :edit, {id: @focus_type.to_param}
-        assigns(:focus_type).should eq(@focus_type)
+        expect(assigns(:focus_type)).to eq(@focus_type)
       end
     end
 
@@ -52,29 +52,29 @@ describe FocusTypesController do
 
         it "assigns a newly created focus_type as @focus_type" do
           post :create, {focus_type: FactoryGirl.attributes_for(:focus_type)}
-          assigns(:focus_type).should be_a(FocusType)
-          assigns(:focus_type).should be_persisted
+          expect(assigns(:focus_type)).to be_a(FocusType)
+          expect(assigns(:focus_type)).to be_persisted
         end
 
         it "redirects to the created focus_type" do
           post :create, {focus_type: FactoryGirl.attributes_for(:focus_type)}
-          response.should redirect_to(FocusType.last)
+          expect(response).to redirect_to(FocusType.last)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved focus_type as @focus_type" do
           # Trigger the behavior that occurs when invalid params are submitted
-          FocusType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(FocusType).to receive(:save).and_return(false)
           post :create, {focus_type: { "name" => "" }}
-          assigns(:focus_type).should be_a_new(FocusType)
+          expect(assigns(:focus_type)).to be_a_new(FocusType)
         end
 
         it "re-renders the 'new' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          FocusType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(FocusType).to receive(:save).and_return(false)
           post :create, {focus_type: { "name" => "" }}
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -87,34 +87,34 @@ describe FocusTypesController do
           # specifies that the FocusType created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          FocusType.any_instance.should_receive(:update).with({ "name" => "MyString" })
+          allow_any_instance_of(FocusType).to receive(:update).with({ "name" => "MyString" })
           put :update, {id: @focus_type.to_param, focus_type: { "name" => "MyString" }}
         end
 
         it "assigns the requested focus_type as @focus_type" do
           put :update, {id: @focus_type.to_param, focus_type: { "name" => "MyString" }}
-          assigns(:focus_type).should eq(@focus_type)
+          expect(assigns(:focus_type)).to eq(@focus_type)
         end
 
         it "redirects to the focus_type" do
           put :update, {id: @focus_type.to_param, focus_type: { "name" => "MyString" }}
-          response.should redirect_to(@focus_type)
+          expect(response).to redirect_to(@focus_type)
         end
       end
 
       describe "with invalid params" do
         it "assigns the focus_type as @focus_type" do
           # Trigger the behavior that occurs when invalid params are submitted
-          FocusType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(FocusType).to receive(:save).and_return(false)
           put :update, {id: @focus_type.to_param, focus_type: { "name" => "" }}
-          assigns(:focus_type).should eq(@focus_type)
+          expect(assigns(:focus_type)).to eq(@focus_type)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          FocusType.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(FocusType).to receive(:save).and_return(false)
           put :update, {id: @focus_type.to_param, focus_type: { "name" => "" }}
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
     end
@@ -130,7 +130,7 @@ describe FocusTypesController do
 
       it "redirects to the focus_types list" do
         delete :destroy, {id: @focus_type.to_param}
-        response.should redirect_to(focus_types_url)
+        expect(response).to redirect_to(focus_types_url)
       end
     end
   end

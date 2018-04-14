@@ -7,7 +7,7 @@ describe SuggestionsController do
     it "assigns all suggestions as @suggestions" do
       suggestion = FactoryGirl.create(:suggestion, :with_creator)
       get :index, {}
-      assigns(:suggestions).should eq([suggestion])
+      expect(assigns(:suggestions)).to eq([suggestion])
     end
   end
 
@@ -15,7 +15,7 @@ describe SuggestionsController do
     it "assigns the requested suggestion as @suggestion" do
       suggestion = FactoryGirl.create(:suggestion, :with_creator)
       get :show, {id: suggestion.to_param}
-      assigns(:suggestion).should eq(suggestion)
+      expect(assigns(:suggestion)).to eq(suggestion)
     end
   end
 
@@ -25,14 +25,14 @@ describe SuggestionsController do
 
       it "assigns a new suggestion as @suggestion" do
         get :new, {}
-        assigns(:suggestion).should be_a_new(Suggestion)
+        expect(assigns(:suggestion)).to be_a_new(Suggestion)
       end
     end
 
     describe 'when not authenticated' do
       it 'should redirect to login' do
         get :new, {}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -44,7 +44,7 @@ describe SuggestionsController do
       it "assigns the requested suggestion as @suggestion" do
         suggestion = FactoryGirl.create(:suggestion, creator: @user)
         get :edit, {id: suggestion.to_param}
-        assigns(:suggestion).should eq(suggestion)
+        expect(assigns(:suggestion)).to eq(suggestion)
       end
     end
 
@@ -52,7 +52,7 @@ describe SuggestionsController do
       it 'should redirect to login' do
         suggestion = FactoryGirl.create(:suggestion, :with_creator)
         get :edit, {id: suggestion.to_param}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -81,13 +81,13 @@ describe SuggestionsController do
 
         it "assigns a newly created suggestion as @suggestion" do
           post :create, {suggestion: @attrs}
-          assigns(:suggestion).should be_a(Suggestion)
-          assigns(:suggestion).should be_persisted
+          expect(assigns(:suggestion)).to be_a(Suggestion)
+          expect(assigns(:suggestion)).to be_persisted
         end
 
         it "redirects to the list of suggestions" do
           post :create, {suggestion: @attrs}
-          response.should redirect_to suggestions_path
+          expect(response).to redirect_to suggestions_path
         end
 
         it "should email all team members" do
@@ -98,16 +98,16 @@ describe SuggestionsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved suggestion as @suggestion" do
         # Trigger the behavior that occurs when invalid params are submitted
-          Suggestion.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Suggestion).to receive(:save).and_return(false)
           post :create, {suggestion: { "title" => "" }}
-          assigns(:suggestion).should be_a_new(Suggestion)
+          expect(assigns(:suggestion)).to be_a_new(Suggestion)
         end
 
         it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-          Suggestion.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Suggestion).to receive(:save).and_return(false)
           post :create, {suggestion: { "title" => "" }}
-          response.should render_template("new")
+          expect(response).to render_template("new")
         end
       end
     end
@@ -115,7 +115,7 @@ describe SuggestionsController do
     describe 'when not authenticated' do
       it 'should redirect to login' do
         post :create, {suggestion: @attrs}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
@@ -131,34 +131,34 @@ describe SuggestionsController do
           # specifies that the Suggestion created on the previous line
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
-          Suggestion.any_instance.should_receive(:update).with({ "title" => "MyString" })
+          allow_any_instance_of(Suggestion).to receive(:update).with({ "title" => "MyString" })
           put :update, {id: @suggestion.to_param, suggestion: { "title" => "MyString" }}
         end
 
         it "assigns the requested suggestion as @suggestion" do
           put :update, {id: @suggestion.to_param, suggestion: { "title" => "MyString" }}
-          assigns(:suggestion).should eq(@suggestion)
+          expect(assigns(:suggestion)).to eq(@suggestion)
         end
 
         it "redirects to the list of suggestions" do
           put :update, {id: @suggestion.to_param, suggestion: { "title" => "MyString" }}
-          response.should redirect_to suggestions_path
+          expect(response).to redirect_to suggestions_path
         end
       end
 
       describe "with invalid params" do
         it "assigns the suggestion as @suggestion" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Suggestion.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Suggestion).to receive(:save).and_return(false)
           put :update, {id: @suggestion.to_param, suggestion: { "title" => "" }}
-          assigns(:suggestion).should eq(@suggestion)
+          expect(assigns(:suggestion)).to eq(@suggestion)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
-          Suggestion.any_instance.stub(:save).and_return(false)
+          allow_any_instance_of(Suggestion).to receive(:save).and_return(false)
           put :update, {id: @suggestion.to_param, suggestion: { "title" => "" }}
-          response.should render_template("edit")
+          expect(response).to render_template("edit")
         end
       end
 
@@ -169,7 +169,7 @@ describe SuggestionsController do
         user = FactoryGirl.create :user
         suggestion = FactoryGirl.create :suggestion, creator: user
         put :update, { id: suggestion.to_param, suggestion: { 'title' => '1' }}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -187,7 +187,7 @@ describe SuggestionsController do
 
       it "redirects to the suggestions list" do
         delete :destroy, {id: @suggestion.to_param}
-        response.should redirect_to(suggestions_url)
+        expect(response).to redirect_to(suggestions_url)
       end
     end
 
@@ -196,7 +196,7 @@ describe SuggestionsController do
         user = FactoryGirl.create :user
         suggestion = FactoryGirl.create :suggestion, creator: user
         delete :destroy, {  id: suggestion.to_param}
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

@@ -8,29 +8,29 @@ describe Suggestion do
   subject { @suggestion }
 
   # Check attributes.
-  it { should respond_to :title }
-  it { should respond_to :description }
-  it { should respond_to :creator }
-  it { should respond_to :team_member }
-  it { should respond_to :status_id }
-  it { should respond_to :completion_date }
-  it { should respond_to :notes }
+  it { is_expected.to respond_to :title }
+  it { is_expected.to respond_to :description }
+  it { is_expected.to respond_to :creator }
+  it { is_expected.to respond_to :team_member }
+  it { is_expected.to respond_to :status_id }
+  it { is_expected.to respond_to :completion_date }
+  it { is_expected.to respond_to :notes }
   
   describe 'when title is not present' do
     before(:each) { @suggestion.title = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
   
   describe 'when description is not present' do
     before(:each) { @suggestion.description = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
   
   describe 'when creator is not present' do
     before(:each) { @suggestion.creator = nil }
 
-    it { should_not be_valid }
+    it { is_expected.not_to be_valid }
   end
 end
