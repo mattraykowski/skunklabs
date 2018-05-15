@@ -7,10 +7,10 @@ describe RoleTypesController do
       @user.admin = true
       @user.save
     end
-    
+
     describe "GET index" do
       before(:each) { @role_type = FactoryGirl.create(:role_type) }
-      
+
       it "assigns all role_types as @role_types" do
         get :index, {}
         expect(assigns(:role_types)).to eq([@role_type])
@@ -19,9 +19,9 @@ describe RoleTypesController do
 
     describe "GET show" do
       before(:each) { @role_type = FactoryGirl.create(:role_type) }
-      
+
       it "assigns the requested role_type as @role_type" do
-        get :show, {id: @role_type.to_param}
+        get :show, params: {id: @role_type.to_param}
       end
     end
 
@@ -34,9 +34,9 @@ describe RoleTypesController do
 
     describe "GET edit" do
       before(:each) { @role_type = FactoryGirl.create(:role_type) }
-      
+
       it "assigns the requested role_type as @role_type" do
-        get :edit, {id: @role_type.to_param}
+        get :edit, params: {id: @role_type.to_param}
         expect(assigns(:role_type)).to eq(@role_type)
       end
     end
@@ -45,18 +45,18 @@ describe RoleTypesController do
       describe "with valid params" do
         it "creates a new RoleType" do
           expect {
-            post :create, {role_type: FactoryGirl.attributes_for(:role_type)}
+            post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
           }.to change(RoleType, :count).by(1)
         end
 
         it "assigns a newly created role_type as @role_type" do
-          post :create, {role_type: FactoryGirl.attributes_for(:role_type)}
+          post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
           expect(assigns(:role_type)).to be_a(RoleType)
           expect(assigns(:role_type)).to be_persisted
         end
 
         it "redirects to the created role_type" do
-          post :create, {role_type: FactoryGirl.attributes_for(:role_type)}
+          post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
           expect(response).to redirect_to(RoleType.last)
         end
       end
@@ -65,14 +65,14 @@ describe RoleTypesController do
         it "assigns a newly created but unsaved role_type as @role_type" do
         # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(RoleType).to receive(:save).and_return(false)
-          post :create, {role_type: { "name" => "" }}
+          post :create, params: {role_type: { "name" => "" }}
           expect(assigns(:role_type)).to be_a_new(RoleType)
         end
 
         it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(RoleType).to receive(:save).and_return(false)
-          post :create, {role_type: { "name" => "" }}
+          post :create, params: {role_type: { "name" => "" }}
           expect(response).to render_template("new")
         end
       end
@@ -80,7 +80,7 @@ describe RoleTypesController do
 
     describe "PUT update" do
       before(:each) { @role_type = FactoryGirl.create(:role_type) }
-      
+
       describe "with valid params" do
         it "updates the requested role_type" do
           # Assuming there are no other role_types in the database, this
@@ -88,16 +88,16 @@ describe RoleTypesController do
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
           allow_any_instance_of(RoleType).to receive(:update).with({ "name" => "MyString" })
-          put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
+          put :update, params: {id: @role_type.to_param, role_type: { "name" => "MyString" }}
         end
 
         it "assigns the requested role_type as @role_type" do
-          put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
+          put :update, params: {id: @role_type.to_param, role_type: { "name" => "MyString" }}
           expect(assigns(:role_type)).to eq(@role_type)
         end
 
         it "redirects to the role_type" do
-          put :update, {id: @role_type.to_param, role_type: { "name" => "MyString" }}
+          put :update, params: {id: @role_type.to_param, role_type: { "name" => "MyString" }}
           expect(response).to redirect_to(@role_type)
         end
       end
@@ -106,14 +106,14 @@ describe RoleTypesController do
         it "assigns the role_type as @role_type" do
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(RoleType).to receive(:save).and_return(false)
-          put :update, {id: @role_type.to_param, :role_type => { "name" => "" }}
+          put :update, params: {id: @role_type.to_param, :role_type => { "name" => "" }}
           expect(assigns(:role_type)).to eq(@role_type)
         end
 
         it "re-renders the 'edit' template" do
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(RoleType).to receive(:save).and_return(false)
-          put :update, {id: @role_type.to_param, :role_type => { "name" => "" }}
+          put :update, params: {id: @role_type.to_param, :role_type => { "name" => "" }}
           expect(response).to render_template("edit")
         end
       end
@@ -121,15 +121,15 @@ describe RoleTypesController do
 
     describe "DELETE destroy" do
       before(:each) { @role_type = FactoryGirl.create(:role_type) }
-      
+
       it "destroys the requested role_type" do
         expect {
-          delete :destroy, {id: @role_type.to_param}
+          delete :destroy, params: {id: @role_type.to_param}
         }.to change(RoleType, :count).by(-1)
       end
 
       it "redirects to the role_types list" do
-        delete :destroy, {id: @role_type.to_param}
+        delete :destroy, params: {id: @role_type.to_param}
         expect(response).to redirect_to(role_types_url)
       end
     end

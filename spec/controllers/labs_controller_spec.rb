@@ -13,7 +13,7 @@ describe LabsController do
   describe 'GET show' do
     it 'assigns the requested lab as @lab' do
       lab = FactoryGirl.create :lab
-      get :show, {:id => lab.to_param}
+      get :show, params: {:id => lab.to_param}
       expect(assigns(:lab)).to eq(lab)
     end
   end
@@ -42,7 +42,7 @@ describe LabsController do
 
       it 'assigns the requested lab as @lab' do
         lab = FactoryGirl.create :lab, user: @user
-        get :edit, {:id => lab.to_param}
+        get :edit, params: {:id => lab.to_param}
         expect(assigns(:lab)).to eq(lab)
       end
     end
@@ -50,7 +50,7 @@ describe LabsController do
     describe 'when not authenticated' do
       it 'should redirect to sign in' do
         lab = FactoryGirl.create :lab
-        get :edit, {:id => lab.to_param}
+        get :edit, params: {:id => lab.to_param}
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -67,18 +67,18 @@ describe LabsController do
 
         it 'creates a new Lab' do
           expect {
-            post :create, {lab: @attrs}
+            post :create, params: {lab: @attrs}
           }.to change(Lab, :count).by(1)
         end
 
         it 'assigns a newly created lab as @lab' do
-          post :create, {lab: @attrs}
+          post :create, params: {lab: @attrs}
           expect(assigns(:lab)).to be_a(Lab)
           expect(assigns(:lab)).to be_persisted
         end
 
         it 'redirects to the created lab' do
-          post :create, {lab: @attrs}
+          post :create, params: {lab: @attrs}
           expect(response).to redirect_to(Lab.last)
         end
       end
@@ -87,14 +87,14 @@ describe LabsController do
         it 'assigns a newly created but unsaved lab as @lab' do
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(Lab).to receive(:save).and_return(false)
-          post :create, {:lab => { 'user_id' => 'invalid value' }}
+          post :create, params: {:lab => { 'user_id' => 'invalid value' }}
           expect(assigns(:lab)).to be_a_new(Lab)
         end
 
         it 're-renders the "new" template' do
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(Lab).to receive(:save).and_return(false)
-          post :create, {:lab => { 'user_id' => 'invalid value' }}
+          post :create, params: {:lab => { 'user_id' => 'invalid value' }}
           expect(response).to render_template('new')
         end
       end
@@ -102,7 +102,7 @@ describe LabsController do
 
     describe 'when not authenticated' do
       it 'should redirect to login' do
-        post :create, {lab: @attrs}
+        post :create, params: {lab: @attrs}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -120,18 +120,18 @@ describe LabsController do
           # receives the :update_attributes message with whatever params are
           # submitted in the request.
           allow_any_instance_of(Lab).to receive(:update).with({ 'goals' => '1' })
-          put :update, { id: lab.to_param, lab: { 'goals' => '1' }}
+          put :update, params: { id: lab.to_param, lab: { 'goals' => '1' }}
         end
 
         it 'assigns the requested lab as @lab' do
           lab = FactoryGirl.create :lab, user: @user
-          put :update, { id: lab.to_param, lab: FactoryGirl.attributes_for(:lab)}
+          put :update, params: { id: lab.to_param, lab: FactoryGirl.attributes_for(:lab)}
           expect(assigns(:lab)).to eq(lab)
         end
 
         it 'redirects to the lab' do
           lab = FactoryGirl.create :lab, user: @user
-          put :update, { id: lab.to_param, lab: FactoryGirl.attributes_for(:lab)}
+          put :update, params: { id: lab.to_param, lab: FactoryGirl.attributes_for(:lab)}
           expect(response).to redirect_to(lab)
         end
       end
@@ -141,7 +141,7 @@ describe LabsController do
           lab = FactoryGirl.create :lab, user: @user
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(Lab).to receive(:save).and_return(false)
-          put :update, { id: lab.to_param, lab: { 'user_id' => 'invalid value' }}
+          put :update, params: { id: lab.to_param, lab: { 'user_id' => 'invalid value' }}
           expect(assigns(:lab)).to eq(lab)
         end
 
@@ -149,7 +149,7 @@ describe LabsController do
           lab = FactoryGirl.create :lab, user: @user
           # Trigger the behavior that occurs when invalid params are submitted
           allow_any_instance_of(Lab).to receive(:save).and_return(false)
-          put :update, { id: lab.to_param, lab: { 'user_id' => 'invalid value' }}
+          put :update, params: { id: lab.to_param, lab: { 'user_id' => 'invalid value' }}
           expect(response).to render_template('edit')
         end
       end
@@ -159,7 +159,7 @@ describe LabsController do
       it 'should redirect to login' do
         user = FactoryGirl.create :user
         lab = FactoryGirl.create :lab, user: user
-        put :update, { id: lab.to_param, lab: { 'goals' => '1' }}
+        put :update, params: { id: lab.to_param, lab: { 'goals' => '1' }}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -172,13 +172,13 @@ describe LabsController do
       it 'destroys the requested lab' do
         lab = FactoryGirl.create :lab, user: @user
         expect {
-          delete :destroy, {:id => lab.to_param}
+          delete :destroy, params: {:id => lab.to_param}
         }.to change(Lab, :count).by(-1)
       end
 
       it 'redirects to the lab list' do
         lab = FactoryGirl.create :lab, user: @user
-        delete :destroy, {id: lab.to_param}
+        delete :destroy, params: {id: lab.to_param}
         expect(response).to redirect_to(labs_url)
       end
     end
@@ -187,7 +187,7 @@ describe LabsController do
       it 'should redirect to login' do
         user = FactoryGirl.create :user
         lab = FactoryGirl.create :lab, user: user
-        delete :destroy, {  id: lab.to_param}
+        delete :destroy, params: { id: lab.to_param}
         expect(response).to redirect_to(new_user_session_path)
       end
     end

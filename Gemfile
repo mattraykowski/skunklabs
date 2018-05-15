@@ -63,6 +63,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'email_spec'
+  gem 'rails-controller-testing'
 
   # Notifiers
   gem 'rb-notifu'

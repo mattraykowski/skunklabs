@@ -36,7 +36,7 @@ describe UsersController do
         end
 
         it 'should rediect the user to root' do
-          xhr :put, :notices, { id: @other_user.id, notices: 'true' }
+          put :notices, xhr: true, params: { id: @other_user.id, notices: 'true' }
           expect(response).to redirect_to(root_url)
         end
       end
@@ -44,7 +44,7 @@ describe UsersController do
       context 'when user is the current user' do
         it 'should update the meeting notice' do
           expect_any_instance_of(User).to receive(:update).with({ meeting_notice: 'true' }).and_return(true)
-          xhr :put, :notices, { id: @user.id, notices: 'true' }
+          put :notices, xhr: true, params: { id: @user.id, notices: 'true' }
         end
       end
     end
@@ -57,7 +57,7 @@ describe UsersController do
 
       it 'should update the meeting notice' do
         expect_any_instance_of(User).to receive(:update).with({ meeting_notice: 'true' }).and_return(true)
-        xhr :put, :notices, { id: @user.id, notices: 'true' }
+        put :notices, xhr: true, params: { id: @user.id, notices: 'true' }
       end
     end
   end
@@ -68,7 +68,7 @@ describe UsersController do
 
     context 'when current user is not an admin' do
       it 'should rediect the user to root' do
-        xhr :put, :admin, { id: @user.id, admin: 'true' }
+        put :admin, xhr: true, params: { id: @user.id, admin: 'true' }
         expect(response).to redirect_to(root_url)
       end
     end
@@ -81,7 +81,7 @@ describe UsersController do
 
       it 'should update the admin flag' do
         expect_any_instance_of(User).to receive(:update).with({ admin: 'true' }).and_return(true)
-        xhr :put, :admin, { id: @user.id, admin: 'true' }
+        put :admin, xhr: true, params: { id: @user.id, admin: 'true' }
       end
     end
   end
@@ -92,7 +92,7 @@ describe UsersController do
 
     context 'when current user is not an admin' do
       it 'should rediect the user to root' do
-        xhr :put, :team, { id: @user.id, team: 'true' }
+        put :team, xhr: true, params: { id: @user.id, team: 'true' }
         expect(response).to redirect_to(root_url)
       end
     end
@@ -105,7 +105,7 @@ describe UsersController do
 
       it 'should update the suggestion team flag' do
         expect_any_instance_of(User).to receive(:update).with({ suggestion_team_member: 'true' }).and_return(true)
-        xhr :put, :team, { id: @user.id, team: 'true' }
+        put :team, xhr: true, params: { id: @user.id, team: 'true' }
       end
     end
   end

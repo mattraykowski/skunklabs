@@ -37,7 +37,7 @@ describe SuggestionStatesController do
   describe "GET show" do
     it "assigns the requested suggestion_state as @suggestion_state" do
       suggestion_state = FactoryGirl.create(:suggestion_state)
-      get :show, {:id => suggestion_state.to_param}
+      get :show, params: {:id => suggestion_state.to_param}
       expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
   end
@@ -52,7 +52,7 @@ describe SuggestionStatesController do
   describe "GET edit" do
     it "assigns the requested suggestion_state as @suggestion_state" do
       suggestion_state = FactoryGirl.create(:suggestion_state)
-      get :edit, {:id => suggestion_state.to_param}
+      get :edit, params: {:id => suggestion_state.to_param}
       expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
   end
@@ -61,18 +61,18 @@ describe SuggestionStatesController do
     describe "with valid params" do
       it "creates a new SuggestionState" do
         expect {
-          post :create, {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+          post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
         }.to change(SuggestionState, :count).by(1)
       end
 
       it "assigns a newly created suggestion_state as @suggestion_state" do
-        post :create, {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
         expect(assigns(:suggestion_state)).to be_a(SuggestionState)
         expect(assigns(:suggestion_state)).to be_persisted
       end
 
       it "redirects to the created suggestion_state" do
-        post :create, {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
         expect(response).to redirect_to(SuggestionState.last)
       end
     end
@@ -81,14 +81,14 @@ describe SuggestionStatesController do
       it "assigns a newly created but unsaved suggestion_state as @suggestion_state" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
-        post :create, {:suggestion_state => { "name" => "" }}
+        post :create, params: {:suggestion_state => { "name" => "" }}
         expect(assigns(:suggestion_state)).to be_a_new(SuggestionState)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
-        post :create, {:suggestion_state => { "name" => "" }}
+        post :create, params: {:suggestion_state => { "name" => "" }}
         expect(response).to render_template("new")
       end
     end
@@ -96,40 +96,40 @@ describe SuggestionStatesController do
 
   describe "PUT update" do
     before(:each) { @suggestion_state = FactoryGirl.create(:suggestion_state) }
-    
-    describe "with valid params" do      
+
+    describe "with valid params" do
       it "updates the requested suggestion_state" do
         # Assuming there are no other suggestion_states in the database, this
         # specifies that the SuggestionState created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         allow_any_instance_of(SuggestionState).to receive(:update).with({ "name" => "MyString" })
-        put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "MyString" }}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "MyString" }}
       end
 
       it "assigns the requested suggestion_state as @suggestion_state" do
-        put :update, {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
         expect(assigns(:suggestion_state)).to eq(@suggestion_state)
       end
 
       it "redirects to the suggestion_state" do
-        put :update, {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
         expect(response).to redirect_to(@suggestion_state)
       end
     end
 
-    describe "with invalid params" do      
+    describe "with invalid params" do
       it "assigns the suggestion_state as @suggestion_state" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
-        put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
         expect(assigns(:suggestion_state)).to eq(@suggestion_state)
       end
 
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(SuggestionState).to receive(:save).and_return(false)
-        put :update, {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => { "name" => "" }}
         expect(response).to render_template("edit")
       end
     end
@@ -137,15 +137,15 @@ describe SuggestionStatesController do
 
   describe "DELETE destroy" do
     before(:each) { @suggestion_state = FactoryGirl.create(:suggestion_state) }
-    
+
     it "destroys the requested suggestion_state" do
       expect {
-        delete :destroy, {:id => @suggestion_state.to_param}
+        delete :destroy, params: {:id => @suggestion_state.to_param}
       }.to change(SuggestionState, :count).by(-1)
     end
 
     it "redirects to the suggestion_states list" do
-      delete :destroy, {:id => @suggestion_state.to_param}
+      delete :destroy, params: {:id => @suggestion_state.to_param}
       expect(response).to redirect_to(suggestion_states_url)
     end
   end

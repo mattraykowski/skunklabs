@@ -10,7 +10,7 @@ describe LabSupportersController do
     end
 
     it "assigns all lab_supporters as @lab_supporters" do
-      get :supporters, {lab_id: @lab.id}
+      get :supporters, params: {lab_id: @lab.id}
       expect(assigns(:lab_supporters)).to eq([@lab_supporter])
     end
   end
@@ -22,13 +22,13 @@ describe LabSupportersController do
 
     describe 'GET support' do
       it 'should redirect to login' do
-        get :support, {lab_id: 1}
+        get :support, params: {lab_id: 1}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
     describe 'GET unsupport' do
       it 'should redirect to login' do
-        get :unsupport, {lab_id: 1}
+        get :unsupport, params: {lab_id: 1}
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -49,19 +49,19 @@ describe LabSupportersController do
 
       describe 'GET support' do
         it 'should redirect to the lab' do
-          get :support, {lab_id: 1}
+          get :support, params: {lab_id: 1}
           expect(response).to redirect_to(@lab)
         end
 
         it 'should not add support' do
           expect {
-            get :support, {lab_id: 1}
+            get :support, params: {lab_id: 1}
           }.to change(LabSupporter, :count).by(0)
         end
       end
       describe 'GET unsupport' do
         it 'should redirect to the lab' do
-          get :unsupport, {lab_id: 1}
+          get :unsupport, params: {lab_id: 1}
           expect(response).to redirect_to(@lab)
         end
 
@@ -69,7 +69,7 @@ describe LabSupportersController do
           before(:each) { FactoryGirl.create(:lab_supporter, lab: @lab, user: @user)}
           it 'should remove support' do
             expect {
-              get :unsupport, {lab_id: 1}
+              get :unsupport, params: {lab_id: 1}
             }.to change(LabSupporter, :count).by(-1)
           end
         end
@@ -85,13 +85,13 @@ describe LabSupportersController do
 
       describe 'GET support' do
         it 'should redirect to the lab' do
-          get :support, {lab_id: 1}
+          get :support, params: {lab_id: 1}
           expect(response).to redirect_to(@lab)
         end
 
         it 'should not add support' do
           expect {
-            get :support, {lab_id: 1}
+            get :support, params: {lab_id: 1}
           }.to change(LabSupporter, :count).by(1)
         end
       end
@@ -99,13 +99,13 @@ describe LabSupportersController do
         before(:each) { FactoryGirl.create(:lab_supporter, lab: @lab, user: @user)}
 
         it 'should redirect to the lab' do
-          get :unsupport, {lab_id: 1}
+          get :unsupport, params: {lab_id: 1}
           expect(response).to redirect_to(@lab)
         end
 
         it 'should remove support' do
           expect {
-            get :unsupport, {lab_id: 1}
+            get :unsupport, params: {lab_id: 1}
           }.to change(LabSupporter, :count).by(-1)
         end
       end
