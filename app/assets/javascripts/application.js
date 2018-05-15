@@ -82,7 +82,7 @@ $(document).ready(function() {
     });
   };
 
-  $(window).load(function() {
+  $(window).on('load', function() {
     setTimeout(function() { $('.alert-success').fadeOut(600); }, 2000);
   });
 

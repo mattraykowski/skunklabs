@@ -1,15 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module Skunklabs
   class Application < Rails::Application
@@ -24,21 +19,20 @@ module Skunklabs
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
-    config.i18n.enforce_available_locales = true
 
     # include Bower components in compiled assets
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
     
-    config.assets.precompile.shift
+    # config.assets.precompile.shift
 
-    config.assets.precompile.push(Proc.new do |path|
-      File.extname(path).in? [
-        '.html', '.erb', '.haml',                 # Templates
-        '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
-        '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
-      ]
-    end)
+    #config.assets.precompile.push(Proc.new do |path|
+    #  File.extname(path).in? [
+    #    '.html', '.erb', '.haml',                 # Templates
+    #    '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
+    #    '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+    #    '.css'
+    #  ]
+    #end)
 
     config.generators do |g|
       g.test_framework :rspec, fixture: true
@@ -48,6 +42,6 @@ module Skunklabs
       g.stylesheets false
       g.javascripts false
       g.helper = false 
-    end     
+    end  
   end
 end

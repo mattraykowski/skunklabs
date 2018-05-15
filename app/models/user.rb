@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # before_save :get_ldap_attributes
 
   has_many :suggestion_votes
-  has_many :supports, foreign_key: 'user_id', class: 'LabSupporter'
+  has_many :supports, foreign_key: 'user_id', class_name: 'LabSupporter'
 
   scope :all_team_members, -> { where(suggestion_team_member: true) }
   scope :all_notice_recipients, -> { where(meeting_notice: true) }

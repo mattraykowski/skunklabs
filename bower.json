@@ -1,23 +1,18 @@
 {
-  "name": "skunklabs",
-  "homepage": "https://github.com/mattraykowski/skunklabs",
-  "description": "",
-  "main": "",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "bootstrap": "^3.3.7",
-    "bootstrap3-wysihtml5-bower": "bootstrap3-wysiwyg#^0.3.3",
-    "seiyria-bootstrap-slider": "^10.0.0",
-    "bootstrap-switch": "^3.3.4",
-    "font-awesome": "^5.0.10",
-    "bootbox.js": "bootbox#^4.4.0"
+  "lib": {
+    "name": "bower-rails generated lib assets",
+    "dependencies": {
+    }
+  },
+  "vendor": {
+    "name": "bower-rails generated vendor assets",
+    "dependencies": {
+      "bootstrap": "^3.3.7",
+      "bootstrap3-wysihtml5-bower": "bootstrap3-wysiwyg#^0.3.3",
+      "seiyria-bootstrap-slider": "^10.0.0",
+      "bootstrap-switch": "^3.3.4",
+      "font-awesome": "^5.0.10",
+      "bootbox.js": "bootbox#^4.4.0"
+    }
   }
 }

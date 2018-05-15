@@ -8,12 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap/dist/css/bootstrap
- *= require bootstrap/dist/css/bootstrap-theme
- *= require bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5
- *= require seiyria-bootstrap-slider/dist/css/bootstrap-slider
- *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch
- *= require font-awesome/web-fonts-with-css/css/fontawesome.css
+ *= require bootstrap/dist/css/bootstrap.css
+ *= require bootstrap/dist/css/bootstrap-theme.css
+ *= require bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.css
+ *= require seiyria-bootstrap-slider/dist/css/bootstrap-slider.css
+ *= require bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css
  *= require_self
  */
 
