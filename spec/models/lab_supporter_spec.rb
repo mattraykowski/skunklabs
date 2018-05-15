@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe LabSupporter do
   before(:each) do
-    @lab = FactoryGirl.create(:lab)
-    @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-    @lab_supporter = FactoryGirl.create(:lab_supporter, lab: @lab, user: @alt_user)
+    @lab = FactoryBot.create(:lab)
+    @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+    @lab_supporter = FactoryBot.create(:lab_supporter, lab: @lab, user: @alt_user)
   end
 
   subject { @lab_supporter }

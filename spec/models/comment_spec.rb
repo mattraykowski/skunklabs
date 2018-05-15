@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Comment do
   before(:each) do
-    @lab = FactoryGirl.create(:lab)
-    @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+    @lab = FactoryBot.create(:lab)
+    @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
   end
   subject { @comment }
 

@@ -14,12 +14,12 @@ describe CommentsController do
 
   describe "GET index" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+      @lab = FactoryBot.create(:lab)
+      @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
     end
 
     it "assigns all comments as @comments" do
-      #@comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+      #@comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
       get :index, params: {lab_id: @lab.id}
       expect(assigns(:comments)).to eq([@comment])
     end
@@ -27,8 +27,8 @@ describe CommentsController do
 
   describe "GET show" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+      @lab = FactoryBot.create(:lab)
+      @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
     end
 
     it "assigns the requested comment as @comment" do
@@ -40,7 +40,7 @@ describe CommentsController do
   describe "GET new" do
     describe 'when authenticated' do
       login_user
-      before(:each) { @lab = FactoryGirl.create(:lab, user: @user) }
+      before(:each) { @lab = FactoryBot.create(:lab, user: @user) }
 
       it "assigns a new comment as @comment" do
         get :new, params: {lab_id: @lab.id}
@@ -49,7 +49,7 @@ describe CommentsController do
     end
 
     describe 'when not authenticated' do
-      before(:each) { @lab = FactoryGirl.create(:lab) }
+      before(:each) { @lab = FactoryBot.create(:lab) }
 
       it 'should redirect to sign in' do
         get :new, params: {lab_id: @lab.id}
@@ -63,8 +63,8 @@ describe CommentsController do
     describe 'when authenticated' do
       login_user
       before(:each) do
-        @lab = FactoryGirl.create(:lab, user: @user)
-        @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+        @lab = FactoryBot.create(:lab, user: @user)
+        @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
       end
 
       it "assigns the requested comment as @comment" do
@@ -76,8 +76,8 @@ describe CommentsController do
 
     describe 'when not authenticated' do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+        @lab = FactoryBot.create(:lab)
+        @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
       end
 
       it 'should redirect to sign in' do
@@ -94,8 +94,8 @@ describe CommentsController do
 
       describe "with valid params" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @attrs = FactoryGirl.attributes_for(:comment)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @attrs = FactoryBot.attributes_for(:comment)
           @attrs.merge!({lab_id: @lab.id})
         end
 
@@ -119,7 +119,7 @@ describe CommentsController do
 
       describe "with invalid params" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
         end
 
         it "assigns a newly created but unsaved comment as @comment" do
@@ -140,8 +140,8 @@ describe CommentsController do
 
     describe 'when not authenticated' do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @attrs = FactoryGirl.attributes_for(:comment)
+        @lab = FactoryBot.create(:lab)
+        @attrs = FactoryBot.attributes_for(:comment)
         @attrs.merge!({lab_id: @lab.id})
       end
 
@@ -157,8 +157,8 @@ describe CommentsController do
     describe 'when authenticated' do
       login_user
       before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @comment = FactoryGirl.create(:comment, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @comment = FactoryBot.create(:comment, lab: @lab, user: @user)
        end
 
       describe "with valid params" do
@@ -173,13 +173,13 @@ describe CommentsController do
         end
 
         it "assigns the requested comment as @comment" do
-          put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
+          put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryBot.attributes_for(:comment) }
 
           expect(assigns(:comment)).to eq(@comment)
         end
 
         it "redirects to the lab" do
-          put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
+          put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryBot.attributes_for(:comment) }
 
           expect(response).to redirect_to(@lab)
         end
@@ -205,9 +205,9 @@ describe CommentsController do
     describe 'when not the user' do
       login_user
       before(:each) do
-        @other_user = FactoryGirl.create(:user, email: 'non-owner@test.com', login: 'nonowner')
-        @lab = FactoryGirl.create(:lab, user: @user)
-        @comment = FactoryGirl.create(:comment, lab: @lab, user: @other_user)
+        @other_user = FactoryBot.create(:user, email: 'non-owner@test.com', login: 'nonowner')
+        @lab = FactoryBot.create(:lab, user: @user)
+        @comment = FactoryBot.create(:comment, lab: @lab, user: @other_user)
       end
 
       it 'should not change the comment' do
@@ -216,19 +216,19 @@ describe CommentsController do
       end
 
       it 'should redirect to the lab' do
-        put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
+        put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryBot.attributes_for(:comment) }
         expect(response).to redirect_to(@lab)
       end
     end
 
     describe 'when not authenticated' do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
-          @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+          @lab = FactoryBot.create(:lab)
+          @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
         end
 
       it 'should redirect to sign in' do
-        put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryGirl.attributes_for(:comment) }
+        put :update, params: {lab_id: @lab.id, id: @comment.to_param, comment: FactoryBot.attributes_for(:comment) }
 
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -239,8 +239,8 @@ describe CommentsController do
     describe 'when authenticated' do
       login_user
       before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @comment = FactoryGirl.create(:comment, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @comment = FactoryBot.create(:comment, lab: @lab, user: @user)
       end
 
       it "destroys the requested comment" do
@@ -258,9 +258,9 @@ describe CommentsController do
     describe 'when not the user' do
       login_user
       before(:each) do
-        @other_user = FactoryGirl.create(:user, email: 'non-owner@test.com', login: 'nonowner')
-        @lab = FactoryGirl.create(:lab, user: @user)
-        @comment = FactoryGirl.create(:comment, lab: @lab, user: @other_user)
+        @other_user = FactoryBot.create(:user, email: 'non-owner@test.com', login: 'nonowner')
+        @lab = FactoryBot.create(:lab, user: @user)
+        @comment = FactoryBot.create(:comment, lab: @lab, user: @other_user)
       end
 
       it 'should not destroy the requested comment' do
@@ -278,8 +278,8 @@ describe CommentsController do
 
   describe 'when not authenticated' do
     before(:each) do
-          @lab = FactoryGirl.create(:lab)
-          @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+          @lab = FactoryBot.create(:lab)
+          @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
       end
     it 'should redirect to sign in' do
       delete :destroy, params: {lab_id: @lab.id, id: @comment.to_param}

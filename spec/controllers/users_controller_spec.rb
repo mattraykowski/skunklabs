@@ -32,7 +32,7 @@ describe UsersController do
     context 'when current user is not an admin' do
       context 'when user is not the current user' do
         before(:each) do
-          @other_user = FactoryGirl.create(:user, email: 'otheruser@email.com', login: 'otheruser')
+          @other_user = FactoryBot.create(:user, email: 'otheruser@email.com', login: 'otheruser')
         end
 
         it 'should rediect the user to root' do

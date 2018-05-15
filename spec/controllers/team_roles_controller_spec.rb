@@ -4,8 +4,8 @@ describe TeamRolesController do
 
   describe "GET index" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @team_role = FactoryGirl.create(:team_role, lab: @lab)
+      @lab = FactoryBot.create(:lab)
+      @team_role = FactoryBot.create(:team_role, lab: @lab)
     end
     it "assigns all team_roles as @team_roles" do
       get :index, params: {lab_id: @lab.id}
@@ -15,8 +15,8 @@ describe TeamRolesController do
 
   describe "GET show" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @team_role = FactoryGirl.create(:team_role, lab: @lab)
+      @lab = FactoryBot.create(:lab)
+      @team_role = FactoryBot.create(:team_role, lab: @lab)
     end
 
     it "assigns the requested team_role as @team_role" do
@@ -31,8 +31,8 @@ describe TeamRolesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
         end
 
         it "assigns a new team_role as @team_role" do
@@ -43,9 +43,9 @@ describe TeamRolesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @alt_user)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @alt_user)
         end
 
         it "should redirect to the lab" do
@@ -57,7 +57,7 @@ describe TeamRolesController do
 
     describe "when not authenticated" do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
+          @lab = FactoryBot.create(:lab)
       end
       it "should redirect to login" do
         get :new, params: {lab_id: @lab.id}
@@ -72,8 +72,8 @@ describe TeamRolesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
         end
 
         it "assigns the requested team_role as @team_role" do
@@ -84,9 +84,9 @@ describe TeamRolesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @alt_user)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @alt_user)
         end
 
         it "should redirect to the lab" do
@@ -99,8 +99,8 @@ describe TeamRolesController do
 
     describe "when not authenticated" do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab)
+          @lab = FactoryBot.create(:lab)
+          @team_role = FactoryBot.create(:team_role, lab: @lab)
       end
       it "should redirect to login" do
         get :edit, params: {lab_id: @lab.id, id: @team_role.to_param}
@@ -116,10 +116,10 @@ describe TeamRolesController do
       describe "when user is a team member" do
         describe "with valid params" do
           before(:each) do
-            @lab = FactoryGirl.create(:lab, user: @user)
-            @role_type = FactoryGirl.create(:role_type)
-            @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
-            @attrs = FactoryGirl.attributes_for(:team_role)
+            @lab = FactoryBot.create(:lab, user: @user)
+            @role_type = FactoryBot.create(:role_type)
+            @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
+            @attrs = FactoryBot.attributes_for(:team_role)
             @attrs.merge!({lab_id: @lab.id, role_type_id: @role_type.id})
           end
 
@@ -143,9 +143,9 @@ describe TeamRolesController do
 
         describe "with invalid params" do
           before(:each) do
-            @lab = FactoryGirl.create(:lab, user: @user)
-            @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
-            @attrs = FactoryGirl.attributes_for(:team_role)
+            @lab = FactoryBot.create(:lab, user: @user)
+            @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
+            @attrs = FactoryBot.attributes_for(:team_role)
             @attrs.merge!({lab_id: @lab.id})
           end
 
@@ -167,10 +167,10 @@ describe TeamRolesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @role_type = FactoryGirl.create(:role_type)
-          @attrs = FactoryGirl.attributes_for(:team_role)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @role_type = FactoryBot.create(:role_type)
+          @attrs = FactoryBot.attributes_for(:team_role)
           @attrs.merge!({lab_id: @lab.id, role_type_id: @role_type.id})
         end
 
@@ -184,8 +184,8 @@ describe TeamRolesController do
 
     describe "when not authenticated" do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
-          @attrs = FactoryGirl.attributes_for(:team_role)
+          @lab = FactoryBot.create(:lab)
+          @attrs = FactoryBot.attributes_for(:team_role)
           @attrs.merge!({lab_id: @lab.id})
       end
 
@@ -203,8 +203,8 @@ describe TeamRolesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
         end
 
         describe "with valid params" do
@@ -247,9 +247,9 @@ describe TeamRolesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @alt_user)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @alt_user)
         end
 
         it "should redirect to the lab" do
@@ -262,8 +262,8 @@ describe TeamRolesController do
 
     describe "when not authenticated" do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @team_role = FactoryGirl.create(:team_role, lab: @lab)
+        @lab = FactoryBot.create(:lab)
+        @team_role = FactoryBot.create(:team_role, lab: @lab)
       end
 
       it "should redirect to login" do
@@ -281,8 +281,8 @@ describe TeamRolesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
         end
 
         it "destroys the requested team_role" do
@@ -299,9 +299,9 @@ describe TeamRolesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @alt_user)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @team_role = FactoryBot.create(:team_role, lab: @lab, user: @alt_user)
         end
 
         it "should redirect to the lab" do
@@ -314,8 +314,8 @@ describe TeamRolesController do
 
     describe "when not authenticated" do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @team_role = FactoryGirl.create(:team_role, lab: @lab)
+        @lab = FactoryBot.create(:lab)
+        @team_role = FactoryBot.create(:team_role, lab: @lab)
       end
 
       it "should redirect to login" do

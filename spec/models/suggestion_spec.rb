@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Suggestion do
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    @suggestion = FactoryGirl.create(:suggestion, creator: @user)
+    @user = FactoryBot.create(:user)
+    @suggestion = FactoryBot.create(:suggestion, creator: @user)
   end
   subject { @suggestion }
 

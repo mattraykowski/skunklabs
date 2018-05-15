@@ -9,7 +9,7 @@ describe RoleTypesController do
     end
 
     describe "GET index" do
-      before(:each) { @role_type = FactoryGirl.create(:role_type) }
+      before(:each) { @role_type = FactoryBot.create(:role_type) }
 
       it "assigns all role_types as @role_types" do
         get :index, {}
@@ -18,7 +18,7 @@ describe RoleTypesController do
     end
 
     describe "GET show" do
-      before(:each) { @role_type = FactoryGirl.create(:role_type) }
+      before(:each) { @role_type = FactoryBot.create(:role_type) }
 
       it "assigns the requested role_type as @role_type" do
         get :show, params: {id: @role_type.to_param}
@@ -33,7 +33,7 @@ describe RoleTypesController do
     end
 
     describe "GET edit" do
-      before(:each) { @role_type = FactoryGirl.create(:role_type) }
+      before(:each) { @role_type = FactoryBot.create(:role_type) }
 
       it "assigns the requested role_type as @role_type" do
         get :edit, params: {id: @role_type.to_param}
@@ -45,18 +45,18 @@ describe RoleTypesController do
       describe "with valid params" do
         it "creates a new RoleType" do
           expect {
-            post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
+            post :create, params: {role_type: FactoryBot.attributes_for(:role_type)}
           }.to change(RoleType, :count).by(1)
         end
 
         it "assigns a newly created role_type as @role_type" do
-          post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
+          post :create, params: {role_type: FactoryBot.attributes_for(:role_type)}
           expect(assigns(:role_type)).to be_a(RoleType)
           expect(assigns(:role_type)).to be_persisted
         end
 
         it "redirects to the created role_type" do
-          post :create, params: {role_type: FactoryGirl.attributes_for(:role_type)}
+          post :create, params: {role_type: FactoryBot.attributes_for(:role_type)}
           expect(response).to redirect_to(RoleType.last)
         end
       end
@@ -79,7 +79,7 @@ describe RoleTypesController do
     end
 
     describe "PUT update" do
-      before(:each) { @role_type = FactoryGirl.create(:role_type) }
+      before(:each) { @role_type = FactoryBot.create(:role_type) }
 
       describe "with valid params" do
         it "updates the requested role_type" do
@@ -120,7 +120,7 @@ describe RoleTypesController do
     end
 
     describe "DELETE destroy" do
-      before(:each) { @role_type = FactoryGirl.create(:role_type) }
+      before(:each) { @role_type = FactoryBot.create(:role_type) }
 
       it "destroys the requested role_type" do
         expect {

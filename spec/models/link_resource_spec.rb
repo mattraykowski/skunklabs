@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe LinkResource do
-  before(:each) { @link_resource = FactoryGirl.create(:link_resource) }
+  before(:each) { @link_resource = FactoryBot.create(:link_resource) }
   subject { @link_resource }
 
   it { is_expected.to respond_to :lab }

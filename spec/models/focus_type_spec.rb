@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FocusType do
-  before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+  before(:each) { @focus_type = FactoryBot.create(:focus_type) }
   subject { @focus_type }
 
   it { is_expected.to respond_to :name }

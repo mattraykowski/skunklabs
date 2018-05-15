@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe TeamRole do
-  before(:each) { @team_role = FactoryGirl.create(:team_role) }
+  before(:each) { @team_role = FactoryBot.create(:team_role) }
   subject { @team_role }
 
   it { is_expected.to respond_to :lab }

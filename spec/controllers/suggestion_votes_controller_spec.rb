@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SuggestionVotesController do
   login_user
-  before(:each) { @suggestion = FactoryGirl.create(:suggestion, creator: @user) }
+  before(:each) { @suggestion = FactoryBot.create(:suggestion, creator: @user) }
 
   describe "GET 'vote'" do        
     describe "when not voted for already" do
@@ -24,7 +24,7 @@ describe SuggestionVotesController do
     end
 
     describe "when already voted for" do
-      before(:each) { FactoryGirl.create(:suggestion_vote, suggestion: @suggestion, user: @user) }
+      before(:each) { FactoryBot.create(:suggestion_vote, suggestion: @suggestion, user: @user) }
 
       it "redirects to all suggestions" do
         get :vote, params: {id: @suggestion.to_param}
@@ -39,7 +39,7 @@ describe SuggestionVotesController do
   end
 
   describe "GET 'unvote'" do
-    before(:each) { FactoryGirl.create(:suggestion_vote, suggestion: @suggestion, user: @user) }
+    before(:each) { FactoryBot.create(:suggestion_vote, suggestion: @suggestion, user: @user) }
 
     it "redirects to all suggestions" do
       delete :unvote, params: {id: @suggestion.id}

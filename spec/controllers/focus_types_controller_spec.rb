@@ -9,7 +9,7 @@ describe FocusTypesController do
     end
 
     describe "GET index" do
-      before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+      before(:each) { @focus_type = FactoryBot.create(:focus_type) }
 
       it "assigns all focus_types as @focus_types" do
         get :index
@@ -18,7 +18,7 @@ describe FocusTypesController do
     end
 
     describe "GET show" do
-      before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+      before(:each) { @focus_type = FactoryBot.create(:focus_type) }
 
       it "assigns the requested focus_type as @focus_type" do
         get :show, params: {id: @focus_type.to_param}
@@ -34,7 +34,7 @@ describe FocusTypesController do
     end
 
     describe "GET edit" do
-      before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+      before(:each) { @focus_type = FactoryBot.create(:focus_type) }
 
       it "assigns the requested focus_type as @focus_type" do
         get :edit, params: {id: @focus_type.to_param}
@@ -46,18 +46,18 @@ describe FocusTypesController do
       describe "with valid params" do
         it "creates a new FocusType" do
           expect {
-            post :create, params: {focus_type: FactoryGirl.attributes_for(:focus_type)}
+            post :create, params: {focus_type: FactoryBot.attributes_for(:focus_type)}
           }.to change(FocusType, :count).by(1)
         end
 
         it "assigns a newly created focus_type as @focus_type" do
-          post :create, params: {focus_type: FactoryGirl.attributes_for(:focus_type)}
+          post :create, params: {focus_type: FactoryBot.attributes_for(:focus_type)}
           expect(assigns(:focus_type)).to be_a(FocusType)
           expect(assigns(:focus_type)).to be_persisted
         end
 
         it "redirects to the created focus_type" do
-          post :create, params: {focus_type: FactoryGirl.attributes_for(:focus_type)}
+          post :create, params: {focus_type: FactoryBot.attributes_for(:focus_type)}
           expect(response).to redirect_to(FocusType.last)
         end
       end
@@ -80,7 +80,7 @@ describe FocusTypesController do
     end
 
     describe "PUT update" do
-      before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+      before(:each) { @focus_type = FactoryBot.create(:focus_type) }
       describe "with valid params" do
         it "updates the requested focus_type" do
           # Assuming there are no other focus_types in the database, this
@@ -120,7 +120,7 @@ describe FocusTypesController do
     end
 
     describe "DELETE destroy" do
-      before(:each) { @focus_type = FactoryGirl.create(:focus_type) }
+      before(:each) { @focus_type = FactoryBot.create(:focus_type) }
 
       it "destroys the requested focus_type" do
         expect {

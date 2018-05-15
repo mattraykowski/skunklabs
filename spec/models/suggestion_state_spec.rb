@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SuggestionState do
-  before(:each) { @suggestion_state = FactoryGirl.create(:suggestion_state) }
+  before(:each) { @suggestion_state = FactoryBot.create(:suggestion_state) }
   subject { @suggestion_state }
 
   # Check attributes.

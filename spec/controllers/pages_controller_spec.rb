@@ -4,8 +4,8 @@ describe PagesController do
 
   describe "GET 'index'" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user, is_update: true)
+      @lab = FactoryBot.create(:lab)
+      @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user, is_update: true)
     end
 
     it "returns http success" do
@@ -27,8 +27,8 @@ describe PagesController do
 
   describe "GET 'recent_updates'" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @comment = FactoryGirl.create(:comment, lab: @lab, user: @lab.user)
+      @lab = FactoryBot.create(:lab)
+      @comment = FactoryBot.create(:comment, lab: @lab, user: @lab.user)
     end
 
     it 'should return comments' do

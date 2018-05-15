@@ -3,10 +3,10 @@ require 'spec_helper'
 describe LabSupportersController do
   describe "GET index" do
     before(:each) do
-      @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-      @alt_user2 = FactoryGirl.create(:user, email: 'altuser2@example.com', login: 'altuser2')
-      @lab = FactoryGirl.create(:lab, user: @alt_user)
-      @lab_supporter = FactoryGirl.create(:lab_supporter, lab: @lab, user: @alt_user2)
+      @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+      @alt_user2 = FactoryBot.create(:user, email: 'altuser2@example.com', login: 'altuser2')
+      @lab = FactoryBot.create(:lab, user: @alt_user)
+      @lab_supporter = FactoryBot.create(:lab_supporter, lab: @lab, user: @alt_user2)
     end
 
     it "assigns all lab_supporters as @lab_supporters" do
@@ -17,7 +17,7 @@ describe LabSupportersController do
 
   describe 'when not authenticated' do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
+      @lab = FactoryBot.create(:lab)
     end
 
     describe 'GET support' do
@@ -40,11 +40,11 @@ describe LabSupportersController do
     describe 'when user is lab member' do
       before(:each) do
         # Create a lab owned by another user
-        @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-        @lab = FactoryGirl.create(:lab, user: @alt_user)
+        @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+        @lab = FactoryBot.create(:lab, user: @alt_user)
 
         # And add the current user to the lab team.
-        @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @user)
+        @team_role = FactoryBot.create(:team_role, lab: @lab, user: @user)
       end
 
       describe 'GET support' do
@@ -66,7 +66,7 @@ describe LabSupportersController do
         end
 
         describe 'when supporting' do
-          before(:each) { FactoryGirl.create(:lab_supporter, lab: @lab, user: @user)}
+          before(:each) { FactoryBot.create(:lab_supporter, lab: @lab, user: @user)}
           it 'should remove support' do
             expect {
               get :unsupport, params: {lab_id: 1}
@@ -79,8 +79,8 @@ describe LabSupportersController do
     describe 'when user is not lab member' do
       before(:each) do
         # Create a lab owned by another user
-        @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-        @lab = FactoryGirl.create(:lab, user: @alt_user)
+        @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+        @lab = FactoryBot.create(:lab, user: @alt_user)
       end
 
       describe 'GET support' do
@@ -96,7 +96,7 @@ describe LabSupportersController do
         end
       end
       describe 'GET unsupport' do
-        before(:each) { FactoryGirl.create(:lab_supporter, lab: @lab, user: @user)}
+        before(:each) { FactoryBot.create(:lab_supporter, lab: @lab, user: @user)}
 
         it 'should redirect to the lab' do
           get :unsupport, params: {lab_id: 1}

@@ -28,7 +28,7 @@ describe SuggestionStatesController do
 
   describe "GET index" do
     it "assigns all suggestion_states as @suggestion_states" do
-      suggestion_state = FactoryGirl.create(:suggestion_state)
+      suggestion_state = FactoryBot.create(:suggestion_state)
       get :index, {}
       expect(assigns(:suggestion_states)).to eq([suggestion_state])
     end
@@ -36,7 +36,7 @@ describe SuggestionStatesController do
 
   describe "GET show" do
     it "assigns the requested suggestion_state as @suggestion_state" do
-      suggestion_state = FactoryGirl.create(:suggestion_state)
+      suggestion_state = FactoryBot.create(:suggestion_state)
       get :show, params: {:id => suggestion_state.to_param}
       expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
@@ -51,7 +51,7 @@ describe SuggestionStatesController do
 
   describe "GET edit" do
     it "assigns the requested suggestion_state as @suggestion_state" do
-      suggestion_state = FactoryGirl.create(:suggestion_state)
+      suggestion_state = FactoryBot.create(:suggestion_state)
       get :edit, params: {:id => suggestion_state.to_param}
       expect(assigns(:suggestion_state)).to eq(suggestion_state)
     end
@@ -61,18 +61,18 @@ describe SuggestionStatesController do
     describe "with valid params" do
       it "creates a new SuggestionState" do
         expect {
-          post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+          post :create, params: {:suggestion_state => FactoryBot.attributes_for(:suggestion_state)}
         }.to change(SuggestionState, :count).by(1)
       end
 
       it "assigns a newly created suggestion_state as @suggestion_state" do
-        post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        post :create, params: {:suggestion_state => FactoryBot.attributes_for(:suggestion_state)}
         expect(assigns(:suggestion_state)).to be_a(SuggestionState)
         expect(assigns(:suggestion_state)).to be_persisted
       end
 
       it "redirects to the created suggestion_state" do
-        post :create, params: {:suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        post :create, params: {:suggestion_state => FactoryBot.attributes_for(:suggestion_state)}
         expect(response).to redirect_to(SuggestionState.last)
       end
     end
@@ -95,7 +95,7 @@ describe SuggestionStatesController do
   end
 
   describe "PUT update" do
-    before(:each) { @suggestion_state = FactoryGirl.create(:suggestion_state) }
+    before(:each) { @suggestion_state = FactoryBot.create(:suggestion_state) }
 
     describe "with valid params" do
       it "updates the requested suggestion_state" do
@@ -108,12 +108,12 @@ describe SuggestionStatesController do
       end
 
       it "assigns the requested suggestion_state as @suggestion_state" do
-        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryBot.attributes_for(:suggestion_state)}
         expect(assigns(:suggestion_state)).to eq(@suggestion_state)
       end
 
       it "redirects to the suggestion_state" do
-        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryGirl.attributes_for(:suggestion_state)}
+        put :update, params: {:id => @suggestion_state.to_param, :suggestion_state => FactoryBot.attributes_for(:suggestion_state)}
         expect(response).to redirect_to(@suggestion_state)
       end
     end
@@ -136,7 +136,7 @@ describe SuggestionStatesController do
   end
 
   describe "DELETE destroy" do
-    before(:each) { @suggestion_state = FactoryGirl.create(:suggestion_state) }
+    before(:each) { @suggestion_state = FactoryBot.create(:suggestion_state) }
 
     it "destroys the requested suggestion_state" do
       expect {

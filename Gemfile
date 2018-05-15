@@ -48,7 +48,7 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
   gem 'childprocess'
   gem 'syntax'

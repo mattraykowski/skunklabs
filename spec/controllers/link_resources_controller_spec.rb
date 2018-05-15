@@ -3,8 +3,8 @@ require 'spec_helper'
 describe LinkResourcesController do
   describe "GET index" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+      @lab = FactoryBot.create(:lab)
+      @link_resource = FactoryBot.create(:link_resource, lab: @lab)
     end
 
     it "assigns all link_resources as @link_resources" do
@@ -15,8 +15,8 @@ describe LinkResourcesController do
 
   describe "GET show" do
     before(:each) do
-      @lab = FactoryGirl.create(:lab)
-      @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+      @lab = FactoryBot.create(:lab)
+      @link_resource = FactoryBot.create(:link_resource, lab: @lab)
     end
 
     it "assigns the requested link_resource as @link_resource" do
@@ -31,8 +31,8 @@ describe LinkResourcesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         it "assigns a new link_resource as @link_resource" do
@@ -43,9 +43,9 @@ describe LinkResourcesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         it "should redirect to the lab" do
@@ -57,7 +57,7 @@ describe LinkResourcesController do
 
     describe "when not authenticated" do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
+          @lab = FactoryBot.create(:lab)
       end
       it "should redirect to login" do
         get :new, params: {lab_id: @lab.id}
@@ -72,8 +72,8 @@ describe LinkResourcesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         it "assigns the requested link_resource as @link_resource" do
@@ -84,9 +84,9 @@ describe LinkResourcesController do
 
       describe "when user is not a team member" do
         before(:each) do
-          @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-          @lab = FactoryGirl.create(:lab, user: @alt_user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+          @lab = FactoryBot.create(:lab, user: @alt_user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         it "should redirect to the lab" do
@@ -98,7 +98,7 @@ describe LinkResourcesController do
 
     describe "when not authenticated" do
       before(:each) do
-          @lab = FactoryGirl.create(:lab)
+          @lab = FactoryBot.create(:lab)
       end
       it "should redirect to login" do
         get :new, params: {lab_id: @lab.id}
@@ -114,8 +114,8 @@ describe LinkResourcesController do
       describe "when user is a team member" do
         describe "with valid params" do
           before(:each) do
-            @lab = FactoryGirl.create(:lab, user: @user)
-            @attrs = FactoryGirl.attributes_for(:link_resource)
+            @lab = FactoryBot.create(:lab, user: @user)
+            @attrs = FactoryBot.attributes_for(:link_resource)
             @attrs.merge!({lab_id: @lab.id})
           end
 
@@ -139,8 +139,8 @@ describe LinkResourcesController do
 
         describe "with invalid params" do
           before(:each) do
-            @lab = FactoryGirl.create(:lab, user: @user)
-            @attrs = FactoryGirl.attributes_for(:link_resource)
+            @lab = FactoryBot.create(:lab, user: @user)
+            @attrs = FactoryBot.attributes_for(:link_resource)
             @attrs.merge!({lab_id: @lab.id})
           end
 
@@ -161,8 +161,8 @@ describe LinkResourcesController do
 
     describe "when not authenticated" do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @attrs = FactoryGirl.attributes_for(:link_resource)
+        @lab = FactoryBot.create(:lab)
+        @attrs = FactoryBot.attributes_for(:link_resource)
         @attrs.merge!({lab_id: @lab.id})
       end
 
@@ -179,8 +179,8 @@ describe LinkResourcesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         describe "with valid params" do
@@ -216,8 +216,8 @@ describe LinkResourcesController do
 
     describe "when not authenticated" do
       before(:each) do
-        @lab = FactoryGirl.create(:lab)
-        @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+        @lab = FactoryBot.create(:lab)
+        @link_resource = FactoryBot.create(:link_resource, lab: @lab)
       end
 
       it "should redirect to login" do
@@ -233,8 +233,8 @@ describe LinkResourcesController do
 
       describe "when user is a team member" do
         before(:each) do
-          @lab = FactoryGirl.create(:lab, user: @user)
-          @link_resource = FactoryGirl.create(:link_resource, lab: @lab)
+          @lab = FactoryBot.create(:lab, user: @user)
+          @link_resource = FactoryBot.create(:link_resource, lab: @lab)
         end
 
         it "destroys the requested link_resource" do

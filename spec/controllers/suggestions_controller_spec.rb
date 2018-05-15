@@ -5,7 +5,7 @@ describe SuggestionsController do
 
   describe "GET index" do
     it "assigns all suggestions as @suggestions" do
-      suggestion = FactoryGirl.create(:suggestion, :with_creator)
+      suggestion = FactoryBot.create(:suggestion, :with_creator)
       get :index, {}
       expect(assigns(:suggestions)).to eq([suggestion])
     end
@@ -13,7 +13,7 @@ describe SuggestionsController do
 
   describe "GET show" do
     it "assigns the requested suggestion as @suggestion" do
-      suggestion = FactoryGirl.create(:suggestion, :with_creator)
+      suggestion = FactoryBot.create(:suggestion, :with_creator)
       get :show, params: {id: suggestion.to_param}
       expect(assigns(:suggestion)).to eq(suggestion)
     end
@@ -42,7 +42,7 @@ describe SuggestionsController do
       login_user
 
       it "assigns the requested suggestion as @suggestion" do
-        suggestion = FactoryGirl.create(:suggestion, creator: @user)
+        suggestion = FactoryBot.create(:suggestion, creator: @user)
         get :edit, params: {id: suggestion.to_param}
         expect(assigns(:suggestion)).to eq(suggestion)
       end
@@ -50,7 +50,7 @@ describe SuggestionsController do
 
     describe "when not authenticated" do
       it 'should redirect to login' do
-        suggestion = FactoryGirl.create(:suggestion, :with_creator)
+        suggestion = FactoryBot.create(:suggestion, :with_creator)
         get :edit, params: {id: suggestion.to_param}
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -65,12 +65,12 @@ describe SuggestionsController do
       describe "with valid params" do
         before(:each) do
           # Stage the attributes
-          suggestion_state = FactoryGirl.create(:suggestion_state)
-          @attrs = FactoryGirl.attributes_for(:suggestion)
+          suggestion_state = FactoryBot.create(:suggestion_state)
+          @attrs = FactoryBot.attributes_for(:suggestion)
           @attrs[:status_id] = suggestion_state.id
 
           # Create a 'team' to be emailed.
-          @team_user = FactoryGirl.create :user, email: 'teamuser@test.com', login: 'teamuser', suggestion_team_member: true
+          @team_user = FactoryBot.create :user, email: 'teamuser@test.com', login: 'teamuser', suggestion_team_member: true
         end
 
         it "creates a new Suggestion" do
@@ -123,7 +123,7 @@ describe SuggestionsController do
   describe "PUT update" do
     describe "when authenticated" do
       login_user
-      before(:each) { @suggestion = FactoryGirl.create(:suggestion, creator: @user) }
+      before(:each) { @suggestion = FactoryBot.create(:suggestion, creator: @user) }
 
       describe "with valid params" do
         it "updates the requested suggestion" do
@@ -166,8 +166,8 @@ describe SuggestionsController do
 
     describe 'when not authenticated' do
       it 'should redirect to login' do
-        user = FactoryGirl.create :user
-        suggestion = FactoryGirl.create :suggestion, creator: user
+        user = FactoryBot.create :user
+        suggestion = FactoryBot.create :suggestion, creator: user
         put :update, params: { id: suggestion.to_param, suggestion: { 'title' => '1' }}
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -178,7 +178,7 @@ describe SuggestionsController do
   describe "DELETE destroy" do
     describe "when authenticated" do
       login_user
-      before(:each) { @suggestion = FactoryGirl.create(:suggestion, creator: @user) }
+      before(:each) { @suggestion = FactoryBot.create(:suggestion, creator: @user) }
       it "destroys the requested suggestion" do
         expect {
           delete :destroy, params: {id: @suggestion.to_param}
@@ -193,8 +193,8 @@ describe SuggestionsController do
 
     describe 'when not authenticated' do
       it 'should redirect to login' do
-        user = FactoryGirl.create :user
-        suggestion = FactoryGirl.create :suggestion, creator: user
+        user = FactoryBot.create :user
+        suggestion = FactoryBot.create :suggestion, creator: user
         delete :destroy, params: {  id: suggestion.to_param}
         expect(response).to redirect_to(new_user_session_path)
       end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Lab do
-  before(:each) { @lab = FactoryGirl.create(:lab) }
+  before(:each) { @lab = FactoryBot.create(:lab) }
   subject { @lab }
 
   # Check attributes.
@@ -59,7 +59,7 @@ describe Lab do
 
     describe 'when the user matches a team member' do
       it 'should be true' do
-        team_role = FactoryGirl.create(:team_role, lab: @lab, user: @lab.user)
+        team_role = FactoryBot.create(:team_role, lab: @lab, user: @lab.user)
         team_role.save
 
 
@@ -69,8 +69,8 @@ describe Lab do
 
     describe 'when the user does not match a team member' do
       it 'should be false' do
-        addl_user = FactoryGirl.create(:user, email: 'foobar@test.com', login: 'foobar')
-        team_role = FactoryGirl.create(:team_role, lab: @lab, user: addl_user)
+        addl_user = FactoryBot.create(:user, email: 'foobar@test.com', login: 'foobar')
+        team_role = FactoryBot.create(:team_role, lab: @lab, user: addl_user)
         team_role.save
 
         expect(@lab.is_team_member?(@lab.user)).to be false
@@ -81,7 +81,7 @@ describe Lab do
   describe 'is_owner?' do
     describe 'when user is not the owner' do
       it 'should be false' do
-        addl_user = FactoryGirl.create(:user, email: 'foobar@test.com', login: 'foobar')
+        addl_user = FactoryBot.create(:user, email: 'foobar@test.com', login: 'foobar')
         expect(@lab.is_owner?(addl_user)).to be false
       end
     end
@@ -111,8 +111,8 @@ describe Lab do
 
   describe 'lab_watchers' do
     before(:each) do
-      @alt_user = FactoryGirl.create(:user, email: 'altuser@example.com', login: 'altuser')
-      @team_role = FactoryGirl.create(:team_role, lab: @lab, user: @alt_user)
+      @alt_user = FactoryBot.create(:user, email: 'altuser@example.com', login: 'altuser')
+      @team_role = FactoryBot.create(:team_role, lab: @lab, user: @alt_user)
     end
 
     it 'should include the lab founder' do
@@ -125,8 +125,8 @@ describe Lab do
 
     describe 'when user is a supporter' do
       before(:each) do
-        @alt_user2 = FactoryGirl.create(:user, email: 'altuser2@example.com', login: 'altuser2')
-        @lab_supporter = FactoryGirl.create(:lab_supporter, lab: @lab, user: @alt_user2)
+        @alt_user2 = FactoryBot.create(:user, email: 'altuser2@example.com', login: 'altuser2')
+        @lab_supporter = FactoryBot.create(:lab_supporter, lab: @lab, user: @alt_user2)
       end
 
       it 'should include supporters' do
